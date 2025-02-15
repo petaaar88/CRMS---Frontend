@@ -1,14 +1,21 @@
-import { Button } from "@mui/material"
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider, Routes } from "react-router-dom"
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<p>Neki tekst</p>}></Route>
+      <Route path="*" element={<p>Not Found!</p>}></Route>
+    </Route>
+
+  )
+);
 
 const App = () => {
 
   return (
-    <>
-      <h1 class="text-3xl font-bold underline">
-        Hello world!
-      </h1>
-      <Button variant="contained">Contained</Button>
-    </>
+    <RouterProvider router={router}>
+
+    </RouterProvider>
   )
 }
 
