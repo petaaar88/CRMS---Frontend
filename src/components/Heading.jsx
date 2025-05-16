@@ -1,9 +1,10 @@
-import React from 'react'
+import UserBadge from './UserBadge'
 
-const Heading = () => {
+const Heading = ({title}) => {
   return (
-    <div>
-      
+    <div className='flex justify-between items-center mb-8'>
+      <h1 className='text-4xl font-bold'>{title}</h1>
+      <UserBadge/>
     </div>
   )
 }
