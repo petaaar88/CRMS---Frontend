@@ -1,10 +1,12 @@
-import useTheme from "../hooks/useTheme";
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext";
+
 
 import MoonImage from "../assets/moon.png"
 import SunImage from "../assets/sun.png"
 
 const ThemeButton = () => {
-  const [theme, changeTheme] = useTheme();
+  const { theme, changeTheme } = useContext(ThemeContext);
 
   return (
     <button
