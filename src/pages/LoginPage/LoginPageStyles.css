@@ -1,0 +1,9 @@
+.light-theme-gradient{
+    background: #50BF3D;
+    background: linear-gradient(90deg, rgba(80, 191, 61, 1) 0%, rgba(32, 95, 22, 1) 100%);
+}
+
+.dark-theme-gradient{
+    background: #2C4639;
+    background: linear-gradient(180deg, rgba(44, 70, 57, 1) 0%, rgba(25, 89, 52, 1) 100%);
+}

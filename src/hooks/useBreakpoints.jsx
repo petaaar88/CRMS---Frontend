@@ -6,26 +6,35 @@ const useBreakpoints = () => {
     const{windowSize}= useWindowResize();
     const [isMdBreakpoint,setIsMdBreakpoint] = useState(null);
     const [isLgBreakpoint,setIsLgBreakpoint] = useState(null);
+    const [isSmBreakpoint,setIsSmBreakpoint] = useState(null);
 
-    useEffect(()=>{
-
-        if(windowSize.width >=992){
-            setIsLgBreakpoint(true)
+    useEffect(() => {
+        if (windowSize.width >= 992) {
+            setIsLgBreakpoint(true);
             setIsMdBreakpoint(true);
-        }else{
-            setIsLgBreakpoint(false)
-            if(windowSize.width >= 768)
+            setIsSmBreakpoint(true);
+        } else {
+            setIsLgBreakpoint(false);
+
+            if (windowSize.width >= 768) {
                 setIsMdBreakpoint(true);
-            else
+                setIsSmBreakpoint(true);
+            } else {
                 setIsMdBreakpoint(false);
+
+                if (windowSize.width >= 640) {
+                    setIsSmBreakpoint(true);
+                } else {
+                    setIsSmBreakpoint(false);
+                }
+            }
         }
-
-    },[windowSize.width]);
-
+    }, [windowSize.width]);
 
 
 
-  return {isMdBreakpoint, isLgBreakpoint}
+
+  return {isMdBreakpoint, isLgBreakpoint, isSmBreakpoint}
 }
 
 export default useBreakpoints
