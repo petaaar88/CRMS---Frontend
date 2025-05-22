@@ -8,6 +8,7 @@ import "../LoginPage/LoginPageStyles.css"
 import useBreakpoints from "../../hooks/useBreakpoints"
 import { useAuth } from "../../contexts/AuthContext"
 import { useNavigate } from "react-router-dom"
+import LoadingPage from "../LoadingPage/LoadingPage"
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const LoginPage = () => {
   }, [accessToken, loading]);
 
   if (accessToken || loading)
-    return null; 
+    return <LoadingPage/>; 
 
   return (
     

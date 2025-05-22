@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import LoadingPage from "../pages/LoadingPage/LoadingPage";
 
 const ProtectedRoute = ({ children }) => {
   const { accessToken, loading } = useAuth();
@@ -13,10 +14,10 @@ const ProtectedRoute = ({ children }) => {
   }, [accessToken, loading, navigate]);
 
   if (loading) {
-    return <p>Neki tekst</p>; 
+    return <LoadingPage/>; 
   }
 
-  return accessToken ? children : <p>Neki tekst</p>;
+  return accessToken ? children : <LoadingPage/>;
 };
 
 export default ProtectedRoute;
