@@ -3,7 +3,6 @@ import { ThemeContext } from "../../contexts/ThemeContext"
 import LoginForm from "../../components/LoginForm"
 import ThemeButton from "../../components/ThemeButton"
 
-
 import "../LoginPage/LoginPageStyles.css"
 import useBreakpoints from "../../hooks/useBreakpoints"
 import { useAuth } from "../../contexts/AuthContext"
@@ -18,7 +17,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     console.log(accessToken);
-    
+
     if (!loading && accessToken) {
       navigate("/reports");
     }
