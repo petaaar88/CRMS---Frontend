@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { ThemeContext } from "../../contexts/ThemeContext"
 import LoginForm from "../../components/LoginForm"
 import ThemeButton from "../../components/ThemeButton"
@@ -6,11 +6,26 @@ import ThemeButton from "../../components/ThemeButton"
 
 import "../LoginPage/LoginPageStyles.css"
 import useBreakpoints from "../../hooks/useBreakpoints"
+import { useAuth } from "../../contexts/AuthContext"
+import { useNavigate } from "react-router-dom"
 
 const LoginPage = () => {
-
+  const navigate = useNavigate();
   const{theme} = useContext(ThemeContext);
   const {isMdBreakpoint,isSmBreakpoint} = useBreakpoints();
+  const {accessToken,loading} = useAuth();
+
+  useEffect(() => {
+    console.log(accessToken);
+    
+    if (!loading && accessToken) {
+      navigate("/reports");
+    }
+  }, [accessToken, loading]);
+
+  if (accessToken || loading)
+    return null; 
+
   return (
     
     <div className="flex h-full ">

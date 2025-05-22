@@ -3,6 +3,7 @@ import ReportPage from "./pages/ReportPage"
 import MainLayout from "./layouts/MainLayout";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ThemeProvider from "./contexts/ThemeContext";
+import {AuthProvider} from "./contexts/AuthContext";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,7 +22,9 @@ const router = createBrowserRouter(
 const App = () => {
   return (
     <ThemeProvider>
-      <RouterProvider router={router}/>
+      <AuthProvider>
+        <RouterProvider router={router}/>
+      </AuthProvider>
     </ThemeProvider>
   )
 }
