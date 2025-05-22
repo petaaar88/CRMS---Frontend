@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
 
 
   useEffect(() => {
+   
     refreshToken().finally(() => setLoading(false));
   }, []);
 
