@@ -28,12 +28,12 @@ const LoginPage = () => {
 
   return (
     
-    <div className="flex h-full ">
+    <div className="flex h-full bg-white dark:bg-dark-green text-black dark:text-white">
       {isMdBreakpoint &&  
         <div  className={"w-100 " + ( theme === "dark" ? " dark-theme-gradient " : " light-theme-gradient ") }>
         </div>
       }
-        <div className="relative w-full flex  justify-center ">
+        <div className="relative w-full flex  justify-center">
           {!isSmBreakpoint && <div className="absolute mt-8">
             <ThemeButton/>
           </div> }

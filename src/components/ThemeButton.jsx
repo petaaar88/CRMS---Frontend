@@ -10,7 +10,7 @@ const ThemeButton = () => {
 
   return (
     <button
-      className="cursor-pointer outline-0 border-0 rounded-lg p-1 hover:bg-emerald-400 dark:hover:bg-emerald-800"
+      className="cursor-pointer outline-0 border-0 rounded-lg p-1 hover:bg-gray dark:hover:bg-menu-button-dark"
       onClick={changeTheme}
     >
       <img
