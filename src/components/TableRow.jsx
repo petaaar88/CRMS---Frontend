@@ -1,11 +1,15 @@
-const TableRow = ({ data = {} , color}) => {
+const TableRow = ({ data = {} , isHeader = false}) => {
     if (!Object.keys(data).length) return null;
   
+    const classNameColor = isHeader ? 
+    "flex justify-around bg-menu-button-light dark:bg-button-dark-green px-5 py-3 rounded-xl text-black dark:text-white":
+    "flex justify-around bg-gray dark:bg-deep-green px-5 py-3 rounded-xl text-black dark:text-white" ;
+
     return (
-      <div className="flex justify-around bg-gray dark:bg-dark-green px-5 py-3 rounded-xl text-black dark:text-white">
-        {Object.entries(data).map(([, value]) => (
+      <div className = {classNameColor}>
+        {Object.entries(data).map(([key, value]) => (
           <p>
-            {value}
+             {isHeader? key : value}
           </p>
         ))}
       </div>
