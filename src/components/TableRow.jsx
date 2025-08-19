@@ -8,7 +8,7 @@ const TableRow = ({ data = {} , isHeader = false}) => {
     return (
       <div className = {classNameColor}>
         {Object.entries(data).map(([key, value]) => (
-          <p>
+          <p key={key}>  
              {isHeader? key : value}
           </p>
         ))}

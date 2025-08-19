@@ -96,7 +96,7 @@ const AnnouncemensContainer = ({ anchorEl, open, onClose }) => {
       >
         {annoucements
           ? annoucements.map((annoucement) => (
-              <MenuItem className="hover:!bg-transparent" onClick={onClose}>
+              <MenuItem className="hover:!bg-transparent" key={annoucement.annoucementId} onClick={onClose}>
                 <AnnouncementButton
                   annoucement={annoucement}
                   showAnnoucement={showAnnoucement}
