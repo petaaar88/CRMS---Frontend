@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }) => {
       setIsError(true);
       return false;
     }
+    credentials.username = credentials.username.trim();
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
