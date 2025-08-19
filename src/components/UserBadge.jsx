@@ -1,12 +1,15 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useContext } from "react"
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AnnouncemensContainer from "./AnnouncemensContainer"
+import { AnnoucementContext } from "../contexts/AnnoucementContext";
 
 const UserBadge = () => {
 
   const [open, setOpen] = useState(false);
   const divRef = useRef(null);
+
+  const {annoucements} =useContext(AnnoucementContext);
 
   const handleClick = () => setOpen(prev => !prev);
   const handleClose = () => setOpen(false);
@@ -20,7 +23,7 @@ const UserBadge = () => {
               <p className='text-black dark:text-white font-semibold '>Username</p>
               <p className='text-black dark:text-white font-light text-sm'>Role</p>    
           </div>
-          <Badge color="error" variant="dot" invisible={false}>
+          <Badge color="error" variant="dot" invisible={annoucements ? !annoucements.some(annoucement => annoucement.seen == false): true}>
             <NotificationsIcon />
           </Badge>
       </div>

@@ -1,42 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const useFetch = (url, options = {}) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(null);
+const useFetch = () => {
+  const [fetchedData, setFetchedData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (!url) return;
-
+  const fetchData = async (url, options = {}) => {
     setLoading(true);
-    setData(null);
+    setFetchedData(null);
     setError(null);
 
-    fetch(url, { ...options })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        const result = await res.json();
+    try {
+      const res = await fetch(url, options);
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+      const result = await res.json();
+      setFetchedData(result);
+    } catch (err) {
+      setError(err.message || "An error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        
-        if (result.content) {
-          setData(result.content);
-        } else if (result.data) {
-          setData(result.data);
-        } else {
-          setData(result);
-        }
-
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message || "An error occurred. Awkward..");
-        setLoading(false);
-      });
-  }, [url, JSON.stringify(options)]);
-
-  return { data, loading, error };
+  return { fetchedData, loading, error, fetchData };
 };
 
 export default useFetch;
