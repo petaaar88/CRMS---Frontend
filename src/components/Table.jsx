@@ -37,7 +37,7 @@ const Table = ({ headers, widths, data, showPartner, minWidth, loading = false }
     };
 
     return (
-        <div className="flex flex-col gap-3" style={{width:"100%", minWidth:minWidth}}>
+        <div className="flex flex-col gap-3 px-3" style={{width:"100%", minWidth:minWidth}}>
             <div className="sticky top-0 grid gap-4 items-center justify-around bg-menu-button-light dark:bg-button-dark-green shadow rounded-lg p-4 font-bold"
                  style={{ gridTemplateColumns: widths.join(" ") }}>
                 {headers.map((col, idx) => (

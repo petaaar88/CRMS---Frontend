@@ -1,6 +1,10 @@
 ﻿const COLLABORATION_SCORE = {
-    GOOD: "1",
-    BAD: "5"
+    POOR: "POOR",
+    BAD: "BAD",
+    AVERAGE: "AVERAGE",
+    GOOD: "GOOD",
+    EXCELLENT: "EXCELLENT"
 }
+
 
 export default COLLABORATION_SCORE;

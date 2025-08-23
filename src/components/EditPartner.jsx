@@ -191,8 +191,8 @@ const EditPartner = ({handleClose, open, data, showMessage, setRefresh}) => {
                     <div>
                         <select
                             className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 cursor-pointer w-full sm:w-110 "
-                            name="colaborationScore"
-                            value={String(newPartner?.colaborationScore || "")}
+                            name="collaborationScore"
+                            value={String(newPartner?.collaborationScore || "")}
                             onChange={handleChange}
                         >
                             <option value="" disabled>
