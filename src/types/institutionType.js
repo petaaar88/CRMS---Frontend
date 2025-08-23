@@ -1,0 +1,7 @@
+﻿const INSITUTION_TYPE = {
+    HOSPITAL: "HOSPITAL",
+    CLINIC: "CLINIC",
+    LABORATORY: "LABORATORY"
+}
+
+export default INSITUTION_TYPE;

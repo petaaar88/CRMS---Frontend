@@ -36,7 +36,7 @@ const router = createBrowserRouter(
                         </AuthorizedRoute>
                     }
                 />
-                <Route path="/reports" element={<ReportPage/>}/>
+                <Route path="/partners-and-reports" element={<ReportPage/>}/>
                 <Route path="*" element={<p>Not Found!</p>}/>
             </Route>
         </Route>

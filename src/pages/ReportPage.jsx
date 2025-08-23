@@ -1,25 +1,46 @@
-import { NavLink } from "react-router-dom"
+import {useState} from "react";
 import Heading from "../components/Heading"
-import TableRow from "../components/TableRow"
+import Partners from "../components/Partners";
 
 const ReportPage = () => {
-  return (
-    <div>
-        <Heading title={"Partners & Reports"} />
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio perspiciatis hic exercitationem nihil voluptatibus? Animi porro quo laboriosam magni inventore, sequi at fugit, atque earum quisquam officia ab, iusto iure?</p>
-        <NavLink to={"/login"} >Login</NavLink>
 
-    <div className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-dark-green  px-3 py-4 rounded-lg shadow-lg">
-            <TableRow isHeader={true} data={{"Ime": "Marko", "Prezime": "Markovic", "Grad": "Novi Sad"}}/>
-            <TableRow data={{"Ime": "Marko", "Prezime": "Markovic", "Grad": "Novi Sad"}}/>
-            <TableRow data={{"Ime": "Marko", "Prezime": "Markovic", "Grad": "Novi Sad"}}/>
-            <TableRow data={{"Ime": "Marko", "Prezime": "Markovic", "Grad": "Novi Sad"}}/>
-    </div>
-        
+    const PAGES = {
+        PARTNERS: 1,
+        REPORTS: 2
+    }
+    const [currentPage, setCurrentPage] = useState(PAGES.PARTNERS)
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium sapiente, ducimus ratione amet molestiae atque sequi facere maxime aspernatur. Soluta optio, alias cumque doloribus voluptatibus odio? Iusto ea deleniti doloremque!</p>
-    </div>
-  )
+
+    return (
+        <div>
+            <Heading title={"Partners & Reports"}/>
+            <div className="dark:bg-dark-green rounded-xl p-6">
+                <div className="flex gap-5">
+                    <button
+                        className={"text-lg border-b-3 font-bold cursor-pointer " + (currentPage === PAGES.PARTNERS ? " text-button-light-green border-button-light-green " : " border-transparent")}
+                        onClick={() => {
+                            if (currentPage != PAGES.PARTNERS) {
+                                setCurrentPage(PAGES.PARTNERS);
+                            }
+                        }}>
+                        Partners
+                    </button>
+                    <button
+                        className={"text-lg border-b-3 font-bold cursor-pointer " + (currentPage === PAGES.REPORTS ? " text-button-light-green border-button-light-green " : " border-transparent")}
+                        onClick={() => {
+                            if (currentPage != PAGES.REPORTS) {
+                                setCurrentPage(PAGES.REPORTS);
+                            }
+                        }}>
+                        Reports
+                    </button>
+                </div>
+                {
+                    currentPage === PAGES.PARTNERS ? <Partners/> : <p>Druga</p>
+                }
+            </div>
+        </div>
+    )
 }
 
 export default ReportPage
