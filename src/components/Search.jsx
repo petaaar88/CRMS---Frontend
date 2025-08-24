@@ -11,6 +11,7 @@ import DateFilter from "./DateFilter";
 import OptionFilter from "./OptionFilter";
 import INSITUTION_TYPE from "../types/institutionType";
 import COLLABORATION_SCORE from "../types/collaborationScore";
+import useBreakpoints from "../hooks/useBreakpoints";
 
 const Search = ({ data, setFilteredData, filters }) => {
   const [value, setValue] = useState("");
@@ -19,6 +20,7 @@ const Search = ({ data, setFilteredData, filters }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const paperRef = useRef(null);
+  const {isLgBreakpoint} = useBreakpoints();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -189,7 +191,7 @@ const Search = ({ data, setFilteredData, filters }) => {
 
   return (
     <>
-      <div>
+      <div style={{display:"flex", width: isLgBreakpoint ? "auto":"100%"}}>
         <Paper
           ref={paperRef}
           component="form"
@@ -198,7 +200,8 @@ const Search = ({ data, setFilteredData, filters }) => {
             p: "2px 4px",
             display: "flex",
             alignItems: "center",
-            width: 400,
+            flex: 1,
+            width: isLgBreakpoint? "100%": 330,
             background:
               theme === "dark"
                 ? "var(--color-darker-green)"

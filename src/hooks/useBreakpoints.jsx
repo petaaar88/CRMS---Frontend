@@ -9,7 +9,7 @@ const useBreakpoints = () => {
     const [isSmBreakpoint,setIsSmBreakpoint] = useState(null);
 
     useEffect(() => {
-        if (windowSize.width >= 992) {
+        if (windowSize.width >= 1024) {
             setIsLgBreakpoint(true);
             setIsMdBreakpoint(true);
             setIsSmBreakpoint(true);

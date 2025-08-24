@@ -4,6 +4,8 @@ import Partners from "../components/Partners";
 import Search from "../components/Search";
 import { useAuth } from "../contexts/AuthContext";
 import FILTER_TYPE from "../types/filterTypes";
+import CreatePartner from "../components/CreatePartner";
+import useBreakpoints from "../hooks/useBreakpoints";
 
 const ReportPage = () => {
 
@@ -19,6 +21,7 @@ const ReportPage = () => {
   const [errorPartners, setErrorPartners] = useState(null);
   const [refreshPartners, setRefreshPartners] = useState(false);
   const {user,accessToken} = useAuth();
+  const {isLgBreakpoint} = useBreakpoints();
 
   const fetchPartners = async () => {
     setLoadingPartners(true);
@@ -61,23 +64,32 @@ const ReportPage = () => {
     <div >
       <Heading title={"Partners & Reports"} />
       <div className="dark:bg-dark-green rounded-xl p-6" >
-        <div className="flex justify-between">
+        <div className="flex flex-col lg:flex-row justify-between">
 
-          <div className="flex gap-5" >
-            <button className={"text-lg border-b-3 font-bold cursor-pointer " + (currentPage === PAGES.PARTNERS ? " text-button-light-green border-button-light-green " : " border-transparent")} onClick={()=>{ if(currentPage != PAGES.PARTNERS){setCurrentPage(PAGES.PARTNERS);}}}>
-              Partners
-            </button>
-            <button className={"text-lg border-b-3 font-bold cursor-pointer " + (currentPage === PAGES.REPORTS ? " text-button-light-green border-button-light-green " : " border-transparent")} onClick={()=>{ if(currentPage != PAGES.REPORTS){setCurrentPage(PAGES.REPORTS);}}}>
-              Reports
-            </button>
+          <div className="flex justify-between">
+
+            <div className="flex gap-5" >
+              <button className={"text-lg border-b-3 font-bold cursor-pointer " + (currentPage === PAGES.PARTNERS ? " text-button-light-green border-button-light-green " : " border-transparent")} onClick={()=>{ if(currentPage != PAGES.PARTNERS){setCurrentPage(PAGES.PARTNERS);}}}>
+                Partners
+              </button>
+              <button className={"text-lg border-b-3 font-bold cursor-pointer " + (currentPage === PAGES.REPORTS ? " text-button-light-green border-button-light-green " : " border-transparent")} onClick={()=>{ if(currentPage != PAGES.REPORTS){setCurrentPage(PAGES.REPORTS);}}}>
+                Reports
+              </button>
+            </div>
+            {!isLgBreakpoint ? <CreatePartner setRefresh={setRefreshPartners}/> : null}
+
           </div>
 
-          <div>
+          
+ 
+          <div className="flex mt-5 lg:mt-0 justify-center gap-4">
             <Search data={partners} setFilteredData={setFilteredPartners} filters={[FILTER_TYPE.COLLABORATION_SCORE, FILTER_TYPE.INSTITUTION_TYPE]}/>
+            {isLgBreakpoint ? <CreatePartner setRefresh={setRefreshPartners}/> : null}
+            
           </div>
         </div>
         {
-        currentPage === PAGES.PARTNERS ? <Partners partners={filteredPartners} loading={loadingPartners} setRefresh={setRefreshPartners}/> :<p>Druga</p>
+        currentPage === PAGES.PARTNERS ?<> <Partners partners={filteredPartners} loading={loadingPartners} setRefresh={setRefreshPartners}/> </>:<p>Druga</p>
         }
       </div>
     </div>

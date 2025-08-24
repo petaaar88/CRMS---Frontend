@@ -6,8 +6,6 @@ const OptionFilter = ({ type, name, optionValue, setFilterValues }) => {
 
     setFilterValues(prev =>{
      let key = Object.keys(optionValue)[0];
-     console.log(prev);
-     
       return { ...prev, [key]: e.target.value };
     })
   }
