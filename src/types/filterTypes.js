@@ -4,6 +4,7 @@ const FILTER_TYPE = {
   IS_COMPLITED: "isComplited",
   INSTITUTION_TYPE: "institutionType",
   COLLABORATION_SCORE: "collaborationScore",
+  VISIT_OUTCOME: 'visitOutcome'
 };
 
 export default FILTER_TYPE;

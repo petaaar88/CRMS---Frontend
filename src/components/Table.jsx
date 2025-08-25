@@ -2,7 +2,7 @@
 import { useState, useMemo, useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-const Table = ({ headers, widths, data, showPartner, minWidth, loading = false }) => {
+const Table = ({ headers, widths, data, showData, minWidth, loading = false }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
     const {theme} = useContext(ThemeContext);
 
@@ -75,7 +75,7 @@ const Table = ({ headers, widths, data, showPartner, minWidth, loading = false }
                         key={idx}
                         className="grid gap-4 items-center justify-around shadow rounded-lg p-4 cursor-pointer transition-colors bg-gray dark:bg-deep-green dark:hover:text-gray-400 dark:active:bg-dark-green text-center"
                         style={{ gridTemplateColumns: widths.join(" ") }}
-                        onClick={() => showPartner(row)}
+                        onClick={() => showData(row)}
                     >
                         {columns.map((col, i) => (
                             <div key={i}>{row[col]}</div>

@@ -12,6 +12,7 @@ import OptionFilter from "./OptionFilter";
 import INSITUTION_TYPE from "../types/institutionType";
 import COLLABORATION_SCORE from "../types/collaborationScore";
 import useBreakpoints from "../hooks/useBreakpoints";
+import VISIT_OUTCOME from "../types/visitOutcome";
 
 const Search = ({ data, setFilteredData, filters }) => {
   const [value, setValue] = useState("");
@@ -41,6 +42,10 @@ const Search = ({ data, setFilteredData, filters }) => {
 
     if (!filtersValue?.collaborationScore) {
       setFilterValues((prev) => ({ ...prev, collaborationScore: null }));
+    }
+
+    if (!filtersValue?.visitOutcome) {
+      setFilterValues((prev) => ({ ...prev, visitOutcome: null }));
     }
   }, []);
 
@@ -83,10 +88,14 @@ const Search = ({ data, setFilteredData, filters }) => {
       switch (stringKey) {
         case FILTER_TYPE.INSTITUTION_TYPE:
           result = optionFilterData(value, result);
-
           break;
-
+        case FILTER_TYPE.DATE:
+          result = dateFilterData(value, result);
+          break;
         case FILTER_TYPE.COLLABORATION_SCORE:
+          result = optionFilterData(value, result);
+          break;
+        case FILTER_TYPE.VISIT_OUTCOME:
           result = optionFilterData(value, result);
           break;
         case FILTER_TYPE.DATE:
@@ -121,6 +130,42 @@ const Search = ({ data, setFilteredData, filters }) => {
     return data;
   };
 
+const dateFilterData = (filterValue, data) => {
+  const { from, to } = filterValue;
+
+  if ((!from || from === "") && (!to || to === "")) {
+    return data;
+  }
+
+  const updatedResult = [];
+
+  for (const item of data) {
+    let matched = false;
+
+    for (const value of Object.values(item)) {
+      if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)) {
+        const itemDate = value;
+
+        if (from && itemDate < from) continue;
+        if (to && itemDate > to) continue;
+
+        matched = true;
+        break; 
+      }
+    }
+
+    if (matched) {
+      updatedResult.push(item);
+    }
+  }
+
+  return updatedResult;
+};
+
+
+
+
+
   const clearFilters = () => {
     const clearedFilters = {};
     Object.keys(filtersValue).forEach((filterValue) => {
@@ -133,6 +178,11 @@ const Search = ({ data, setFilteredData, filters }) => {
 
         case FILTER_TYPE.COLLABORATION_SCORE:
           clearedFilters.collaborationScore = "";
+          break;
+
+        case FILTER_TYPE.VISIT_OUTCOME:
+          clearedFilters.visitOutcome = "";
+          break;
 
         case FILTER_TYPE.DATE:
           clearedFilters.date = { from: "", to: "" };
@@ -182,6 +232,19 @@ const Search = ({ data, setFilteredData, filters }) => {
             setFilterValues={setFilterValues}
             type={COLLABORATION_SCORE}
             name={"Collaboration Score"}
+          />
+        );
+      case FILTER_TYPE.VISIT_OUTCOME:
+        return (
+          <OptionFilter
+            optionValue={
+              filtersValue?.visitOutcome
+                ? { visitOutcome: filtersValue.visitOutcome }
+                : { visitOutcome: "" }
+            }
+            setFilterValues={setFilterValues}
+            type={VISIT_OUTCOME}
+            name={"Visit Outcome"}
           />
         );
       default:

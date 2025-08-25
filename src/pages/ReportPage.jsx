@@ -6,6 +6,8 @@ import { useAuth } from "../contexts/AuthContext";
 import FILTER_TYPE from "../types/filterTypes";
 import CreatePartner from "../components/CreatePartner";
 import useBreakpoints from "../hooks/useBreakpoints";
+import Reports from "../components/Reports";
+import CreateReport from "../components/CreateReport";
 
 const ReportPage = () => {
 
@@ -20,6 +22,13 @@ const ReportPage = () => {
   const [loadingPartners, setLoadingPartners] = useState(false);
   const [errorPartners, setErrorPartners] = useState(null);
   const [refreshPartners, setRefreshPartners] = useState(false);
+
+  const [reports,setReports] = useState(null);
+  const [filteredReports, setFilteredReports] = useState(null);
+  const [loadingReports, setLoadingReports] = useState(false);
+  const [errorReports, setErrorReports] = useState(null);
+  const [refreshReports, setRefreshReports] = useState(false);
+
   const {user,accessToken} = useAuth();
   const {isLgBreakpoint} = useBreakpoints();
 
@@ -51,14 +60,48 @@ const ReportPage = () => {
     }
   };
 
+  const fetchReports = async () => {
+    setLoadingReports(true);
+    setReports(null);
+    setErrorReports(null);
+
+    try {
+      const response = await fetch(import.meta.env.VITE_API_URL + `/api/reports/${user.id}`,{
+                            headers: {
+                                "Content-Type": "application/json",
+                                Authorization: `Bearer ${accessToken}`,
+                            }
+                          });
+
+      if (!response.ok) 
+        throw new Error();
+
+      const result = await response.json();
+    
+      setReports(result);
+      setFilteredReports(result);
+
+    } catch (err) {
+      setErrorReports(err.message || "An error occurred.");
+    } finally {
+      setLoadingReports(false);
+    }
+  };
+
   useEffect(()=>{
     fetchPartners();
+    fetchReports();
   },[]);
 
   useEffect(()=>{
       fetchPartners();
   
   },[refreshPartners]);
+
+  useEffect(()=>{
+      fetchReports();
+  
+  },[refreshReports]);
 
   return (
     <div >
@@ -76,20 +119,23 @@ const ReportPage = () => {
                 Reports
               </button>
             </div>
-            {!isLgBreakpoint ? <CreatePartner setRefresh={setRefreshPartners}/> : null}
+            {!isLgBreakpoint ? currentPage === PAGES.PARTNERS ? <CreatePartner setRefresh={setRefreshPartners}/> : < CreateReport setRefresh={setRefreshReports}/>  : null}
 
           </div>
 
           
  
           <div className="flex mt-5 lg:mt-0 justify-center gap-4">
-            <Search data={partners} setFilteredData={setFilteredPartners} filters={[FILTER_TYPE.COLLABORATION_SCORE, FILTER_TYPE.INSTITUTION_TYPE]}/>
-            {isLgBreakpoint ? <CreatePartner setRefresh={setRefreshPartners}/> : null}
+            <Search data={currentPage === PAGES.PARTNERS ? partners : reports} setFilteredData={currentPage === PAGES.PARTNERS ? setFilteredPartners : setFilteredReports} filters={currentPage === PAGES.PARTNERS ? [FILTER_TYPE.COLLABORATION_SCORE, FILTER_TYPE.INSTITUTION_TYPE] : [FILTER_TYPE.DATE, FILTER_TYPE.VISIT_OUTCOME]}/>
+            {isLgBreakpoint ?  currentPage === PAGES.PARTNERS ? <CreatePartner setRefresh={setRefreshPartners}/> : < CreateReport setRefresh={setRefreshReports}/> : null}
             
           </div>
         </div>
         {
-        currentPage === PAGES.PARTNERS ?<> <Partners partners={filteredPartners} loading={loadingPartners} setRefresh={setRefreshPartners}/> </>:<p>Druga</p>
+          currentPage === PAGES.PARTNERS ?
+          <Partners partners={filteredPartners} loading={loadingPartners} setRefresh={setRefreshPartners}/>
+          :
+          <Reports reports={filteredReports} loading={loadingReports} setRefresh={setRefreshReports}/>
         }
       </div>
     </div>

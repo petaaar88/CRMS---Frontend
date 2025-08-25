@@ -1,0 +1,7 @@
+const VISIT_OUTCOME = {
+    POSITIVE : "POSITIVE",
+    NEGATIVE : "NEGATIVE",
+    NEUTRAL: "NEUTRAL"
+}
+
+export default VISIT_OUTCOME;

@@ -1,11 +1,10 @@
-﻿import { useState } from "react"
-
-import Table from "../components/Table"
-import EditPartner from "../components/EditPartner";
 import { Snackbar } from "@mui/material";
+import { useState } from "react";
+import Table from "./Table";
+import EditReport from "./EditReport";
 
-const Partners = ({ partners, loading, setRefresh }) => {
-  const [partner, setPartner] = useState(null);
+const Reports = ({ reports, loading, setRefresh }) => {
+  const [report, setReport] = useState(null);
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const [snackMessage, setSnackMessage] = useState(null);
@@ -14,9 +13,9 @@ const Partners = ({ partners, loading, setRefresh }) => {
     setOpen(false);
   };
 
-  const showPartner = (partner) => {
+  const showReport = (report) => {
     setOpen(true);
-    setPartner(partner);
+    setReport(report);
   };
 
   const handleCloseSnack = () => {
@@ -30,24 +29,21 @@ const Partners = ({ partners, loading, setRefresh }) => {
 
   const headers = [
     "Institution name",
-    "Institution type",
-    "Contact person",
-    "Contact person postition",
-    "Adress",
-    "City",
-    "Collaboration score",
+    "Sales Representative",
+    "Visit Date",
+    "Visit Outcome",
+    "Report Text"
   ];
+
   const widths = [
     "200px",
     "200px",
     "400px",
     "300px",
     "300px",
-    "100px",
-    "100px",
   ];
 
-  return (
+  return(
     <>
       <div
         className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green  px-3 py-4 rounded-xl"
@@ -60,18 +56,19 @@ const Partners = ({ partners, loading, setRefresh }) => {
         <Table
           headers={headers}
           widths={widths}
-          data={partners}
-          showData={showPartner}
+          data={reports}
+          showData={showReport}
           minWidth={"1800px"}
           loading={loading}
         />
-        <EditPartner
+        <EditReport
           handleClose={handleClose}
           setRefresh={setRefresh}
           open={open}
-          data={partner}
+          data={report}
           showMessage={showMessage}
         />
+        
       </div>
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -84,4 +81,4 @@ const Partners = ({ partners, loading, setRefresh }) => {
   );
 };
 
-export default Partners;
+export default Reports;
