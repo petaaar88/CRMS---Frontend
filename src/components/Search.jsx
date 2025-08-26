@@ -309,7 +309,7 @@ const dateFilterData = (filterValue, data) => {
             },
           }}
         >
-          {filters.map((filter) => (
+          {filters.map((filter, index) => (
             <MenuItem
               disableRipple
               sx={{
@@ -323,7 +323,7 @@ const dateFilterData = (filterValue, data) => {
                   backgroundColor: "transparent",
                 },
               }}
-              key={filter}
+              key={index}
             >
               {renderFilter(filter)}
             </MenuItem>

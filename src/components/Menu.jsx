@@ -87,7 +87,7 @@ const Menu = () => {
                                                  to={"/partners-and-reports"}>Partners And Reports</NavLink></li>
                                     <li><NavLink style={navStyle}
                                                  className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
-                                                 to={"/settings"}>Settings</NavLink></li>
+                                                 to={"/plans"}>Plans</NavLink></li>
                                     {!isMdBreakpoint ?
                                         <li className='flex justify-center mt-4 mb-7'><ThemeButton/></li> : null}
                                 </ul>

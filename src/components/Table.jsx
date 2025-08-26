@@ -2,7 +2,7 @@
 import { useState, useMemo, useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 
-const Table = ({ headers, widths, data, showData, minWidth, loading = false }) => {
+const Table = ({ headers, widths, data, showData, minWidth, loading = false, containsComplitedField = false, handleCheck = null, loadingCheckUpdate = null }) => {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
     const {theme} = useContext(ThemeContext);
 
@@ -70,15 +70,21 @@ const Table = ({ headers, widths, data, showData, minWidth, loading = false }) =
                     No Data
                 </div>
             ) : (
-                sortedData.map((row, idx) => (
+                sortedData.map((row) => (
                     <div
-                        key={idx}
-                        className="grid gap-4 items-center justify-around shadow rounded-lg p-4 cursor-pointer transition-colors bg-gray dark:bg-deep-green dark:hover:text-gray-400 dark:active:bg-dark-green text-center"
+                        key={row.id}
+                        className={"grid gap-4 items-center justify-around shadow rounded-lg p-4 cursor-pointer transition-colors bg-gray dark:bg-deep-green dark:hover:text-gray-400 dark:active:bg-dark-green text-center " + (row.isCompleted ? 'text-gray-300 dark:text-gray-500    bg-gray-600 dark:bg-gray-800': "")}
                         style={{ gridTemplateColumns: widths.join(" ") }}
                         onClick={() => showData(row)}
                     >
                         {columns.map((col, i) => (
-                            <div key={i}>{row[col]}</div>
+                            <div key={i} className="flex justify-center">
+                                {typeof row[col] === "boolean" ? (
+                                    <input type="checkbox" className="scale-180 cursor-pointer" onClick={(e) => {e.stopPropagation(); handleCheck(row.id,!row[col])}} disabled={loadingCheckUpdate}  defaultChecked={row[col]}  />
+                                ) : (
+                                    row[col]
+                                )}
+                            </div>  
                         ))}
                     </div>
                 ))
