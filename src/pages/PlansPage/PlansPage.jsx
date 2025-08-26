@@ -58,9 +58,13 @@ const PlansPage = () => {
     <div>
       <Heading title={"Plans"} />
       <div className="dark:bg-dark-green rounded-xl p-6">
-        <div className="flex flex-col lg:flex-row justify-between">
-          
-          <div className="flex mt-5 lg:mt-0 justify-center gap-4 lg:justify-end w-full">
+        <div className="flex flex-col lg:flex-row justify-between ">
+
+            <div className="mb-4 lg:mb-0">
+              <CreatePlan setRefresh={setRefreshPlans} />
+
+            </div>
+        
             <Search
               data={plans}
               setFilteredData={setFilteredPlans}
@@ -68,8 +72,7 @@ const PlansPage = () => {
                 FILTER_TYPE.DATE
               ]}
             />
-            <CreatePlan setRefresh={setRefreshPlans} />
-          </div>
+          
         </div>
 
         <Plans

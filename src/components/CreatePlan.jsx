@@ -72,7 +72,7 @@ const CreatePlan = ({ setRefresh }) => {
   return (
     <>
       <button
-        className="bg-menu-button-light dark:bg-button-dark-green shadow-md rounded-lg px-4 cursor-pointer font-bold text-lg"
+        className="bg-menu-button-light dark:bg-button-dark-green shadow-md rounded-lg px-4 py-2 cursor-pointer font-bold text-lg w-full"
         onClick={() => setOpen(true)}
       >
         Add +
