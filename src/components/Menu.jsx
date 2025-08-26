@@ -83,7 +83,7 @@ const Menu = () => {
                                                  className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
                                                  to={"/home"}>Home</NavLink></li>
                                     <li><NavLink style={navStyle}
-                                                 className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
+                                                 className={'block w-full text-center py-3 px-2 whitespace-pre-line text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
                                                  to={"/partners-and-reports"}>Partners And Reports</NavLink></li>
                                     <li><NavLink style={navStyle}
                                                  className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
