@@ -9,11 +9,14 @@ import LightHamburgerMenuIcon from "../assets/hamburger-menu-light.png";
 import DarkCloseIcon from "../assets/close-dark.png";
 import LightCloseIcon from "../assets/close-light.png";
 import UserBadge from './UserBadge'
+import { useAuth } from '../contexts/AuthContext'
+import USER_ROLES from '../types/userRoles'
 
 const Menu = () => {
 
     const {isMdBreakpoint, isLgBreakpoint} = useBreakpoints();
     const [isHamburgerMenuClicked, setIsHamburgerMenuClicked] = useState(false);
+    const {user} = useAuth()
 
     const handleClick = () => {
         setIsHamburgerMenuClicked(!isHamburgerMenuClicked);
@@ -88,6 +91,12 @@ const Menu = () => {
                                     <li><NavLink style={navStyle}
                                                  className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
                                                  to={"/plans"}>Plans</NavLink></li>
+                                    { user?.role === USER_ROLES.USER ?
+                                        <li><NavLink style={navStyle}
+                                                 className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
+                                                 to={"/assignments"}>Assignments</NavLink></li>
+                                            : null
+                                                 }
                                     {!isMdBreakpoint ?
                                         <li className='flex justify-center mt-4 mb-7'><ThemeButton/></li> : null}
                                 </ul>

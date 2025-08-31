@@ -59,20 +59,15 @@ const PlansPage = () => {
       <Heading title={"Plans"} />
       <div className="dark:bg-dark-green rounded-xl p-6">
         <div className="flex flex-col lg:flex-row justify-between ">
+          <div className="mb-4 lg:mb-0">
+            <CreatePlan setRefresh={setRefreshPlans} />
+          </div>
 
-            <div className="mb-4 lg:mb-0">
-              <CreatePlan setRefresh={setRefreshPlans} />
-
-            </div>
-        
-            <Search
-              data={plans}
-              setFilteredData={setFilteredPlans}
-              filters={[
-                FILTER_TYPE.DATE
-              ]}
-            />
-          
+          <Search
+            data={plans}
+            setFilteredData={setFilteredPlans}
+            filters={[FILTER_TYPE.DATE]}
+          />
         </div>
 
         <Plans

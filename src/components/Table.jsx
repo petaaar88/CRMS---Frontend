@@ -80,7 +80,7 @@ const Table = ({ headers, widths, data, showData, minWidth, loading = false, con
                         {columns.map((col, i) => (
                             <div key={i} className="flex justify-center">
                                 {typeof row[col] === "boolean" ? (
-                                    <input type="checkbox" className="scale-180 cursor-pointer" onClick={(e) => {e.stopPropagation(); handleCheck(row.id,!row[col])}} disabled={loadingCheckUpdate}  defaultChecked={row[col]}  />
+                                    <input type="checkbox" className="scale-180 cursor-pointer" onClick={(e) => {e.stopPropagation(); handleCheck(row.id,!row[col])}} disabled={loadingCheckUpdate} readOnly  checked={row[col]}  />
                                 ) : (
                                     row[col]
                                 )}

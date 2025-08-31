@@ -16,6 +16,7 @@ import AuthorizedRoute from "./components/AuthorizedRoute";
 import AnnoucementProvider from "./contexts/AnnoucementContext";
 import USER_ROLES from "./types/userRoles";
 import { UserInfoProvider } from "./contexts/UserInfoContext.jsx";
+import AssignmentsPage from "./pages/AssignmentsPage/AssignmentsPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,20 +31,28 @@ const router = createBrowserRouter(
       >
         <Route path="/" element={<p>Neki tekst</p>} />
         <Route
-          path="/admin"
-          element={
-            <AuthorizedRoute authorizedRoles={[USER_ROLES.ADMIN]}>
-              <p>Admin Page</p>
-            </AuthorizedRoute>
-          }
-        />
-        <Route
           path="/partners-and-reports"
           element={<PartnersAndReportsPage />}
         />
         <Route
           path="/plans"
           element={<PlansPage />}
+        />
+        <Route
+          path="/assignments"
+          element={
+            <AuthorizedRoute authorizedRoles={[USER_ROLES.USER]}>
+              <AssignmentsPage/>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <AuthorizedRoute authorizedRoles={[USER_ROLES.ADMIN]}>
+              <p>Admin Page</p>
+            </AuthorizedRoute>
+          }
         />
         <Route path="*" element={<p>Not Found!</p>} />
       </Route>
