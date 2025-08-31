@@ -91,6 +91,12 @@ const Menu = () => {
                                     <li><NavLink style={navStyle}
                                                  className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
                                                  to={"/plans"}>Plans</NavLink></li>
+                                    { user?.role === USER_ROLES.ADMIN ?             
+                                    <li><NavLink style={navStyle}
+                                                 className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
+                                                 to={"/announcements"}>Announcements</NavLink></li>
+                                                 :null
+                                                 }
                                     { user?.role === USER_ROLES.USER ?
                                         <li><NavLink style={navStyle}
                                                  className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}

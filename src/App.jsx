@@ -13,10 +13,11 @@ import ThemeProvider from "./contexts/ThemeContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthorizedRoute from "./components/AuthorizedRoute";
-import AnnoucementProvider from "./contexts/AnnoucementContext";
+import AnnouncementProvider from "./contexts/AnnouncementContext";
 import USER_ROLES from "./types/userRoles";
 import { UserInfoProvider } from "./contexts/UserInfoContext.jsx";
 import AssignmentsPage from "./pages/AssignmentsPage/AssignmentsPage.jsx";
+import AnnouncementsPage from "./pages/AnnouncementsPage/AnnouncementsPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,10 +48,10 @@ const router = createBrowserRouter(
           }
         />
         <Route
-          path="/admin"
+          path="/announcements"
           element={
             <AuthorizedRoute authorizedRoles={[USER_ROLES.ADMIN]}>
-              <p>Admin Page</p>
+              <AnnouncementsPage/>
             </AuthorizedRoute>
           }
         />
@@ -65,9 +66,9 @@ const App = () => {
     <ThemeProvider>
       <AuthProvider>
         <UserInfoProvider>
-          <AnnoucementProvider>
+          <AnnouncementProvider>
             <RouterProvider router={router} />
-          </AnnoucementProvider>
+          </AnnouncementProvider>
         </UserInfoProvider>
       </AuthProvider>
     </ThemeProvider>
