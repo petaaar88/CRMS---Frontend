@@ -3,6 +3,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { CircularProgress, Dialog, DialogContent } from "@mui/material";
 import { ThemeContext } from "../contexts/ThemeContext";
 import useBreakpoints from "../hooks/useBreakpoints";
+import FileUploader from "./FileUploader";
 
 const AnnouncementForm = ({
   open,
@@ -81,16 +82,7 @@ const AnnouncementForm = ({
 
          
           <div className="flex flex-col gap-7 mb-8 sm:mb-5">
-            <input
-              type="file"
-              name="file"
-              onChange={handleChange}
-              className="bg-dark-gray text-white p-3 shadow-lg rounded-md outline-0 w-full"
-              required
-            />
-            {newAnnouncement.file && (
-              <p className="text-white mt-2">Selected file: {newAnnouncement.file.name}</p>
-            )}
+            <FileUploader setNewData={setNewAnnouncement}/>
           </div>
 
          
