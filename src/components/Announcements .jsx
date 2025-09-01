@@ -1,16 +1,13 @@
 import { useState } from "react";
-
 import Table from "../components/Table";
 import { Snackbar } from "@mui/material";
-import { useAuth } from "../contexts/AuthContext";
 import AnnouncementDetails from "./AnnouncementDetails";
 
-const Announcements = ({ announcements, loading, setRefresh }) => {
+const Announcements = ({ announcements, loading, setAnnouncements, setFilteredAnnouncements }) => {
   const [announcement, setAnnouncement] = useState(null);
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const [snackMessage, setSnackMessage] = useState(null);
-  const { accessToken } = useAuth();
 
   const handleClose = () => {
     setOpen(false);
@@ -53,7 +50,8 @@ const Announcements = ({ announcements, loading, setRefresh }) => {
         />
         <AnnouncementDetails
           handleClose={handleClose}
-          setRefresh={setRefresh}
+          setAnnouncements={setAnnouncements}
+          setFilteredAnnouncements={setFilteredAnnouncements}
           open={open}
           data={announcement}
           showMessage={showMessage}

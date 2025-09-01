@@ -7,7 +7,8 @@ import { formatDateToString } from "../utils/dateUtils";
 
 const AnnouncementDetails = ({
   handleClose,
-  setRefresh,
+  setAnnouncements,
+  setFilteredAnnouncements,
   open,
   data,
   showMessage,
@@ -69,10 +70,9 @@ const AnnouncementDetails = ({
       );
       const responseData = await response.json();
 
-      console.log(responseData)
-
       if (response.ok) {
-        setRefresh((prev) => !prev);
+        setAnnouncements((prev) => prev.filter(a => a.id !== data.id));
+        setFilteredAnnouncements((prev) => prev.filter(a => a.id !== data.id));
         showMessage("Announcement successfully deleted!");
       }
       else

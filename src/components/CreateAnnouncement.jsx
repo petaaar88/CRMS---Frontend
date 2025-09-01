@@ -4,7 +4,7 @@ import AnnouncementForm from "./AnnouncementForm";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 
-const CreateAnnouncement = ({ setRefresh }) => {
+const CreateAnnouncement = ({ setAnnouncements, setFilteredAnnouncements }) => {
   const [newAnnouncement, setNewAnnouncement] = useState({
     title: "",
     description: "",
@@ -56,7 +56,8 @@ const CreateAnnouncement = ({ setRefresh }) => {
           description: "",
           file: null,
         });
-        setRefresh((prev) => !prev);
+        setAnnouncements((prev) => ([...prev,responseData.announcement ]));
+        setFilteredAnnouncements((prev) => ([...prev,responseData.announcement ]));
       }
     } catch (error) {
       console.error(error);

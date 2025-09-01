@@ -12,10 +12,8 @@ const AnnouncementsPage = () => {
   const [filteredAnnouncements, setFilteredAnnouncements] = useState(null);
   const [loadingAnnouncements, setLoadingAnnouncements] = useState(false);
   const [errorAnnouncements, setErrorAnnouncements] = useState(null);
-  const [refreshAnnouncements, setRefreshAnnouncement] = useState(false);
 
-  const { user, accessToken } = useAuth();
-  const { isLgBreakpoint } = useBreakpoints();
+  const { accessToken } = useAuth();
 
   const fetchAnnouncements = async () => {
     setLoadingAnnouncements(true);
@@ -50,17 +48,13 @@ const AnnouncementsPage = () => {
     fetchAnnouncements();
   }, []);
 
-  useEffect(() => {
-    fetchAnnouncements();
-  }, [refreshAnnouncements]);
-
   return (
     <div>
       <Heading title={"Announcements"} />
       <div className="dark:bg-dark-green rounded-xl p-6">
         <div className="flex flex-col lg:flex-row justify-between ">
           <div className="mb-4 lg:mb-0">
-            <CreateAnnouncement setRefresh={setRefreshAnnouncement} />
+            <CreateAnnouncement setAnnouncements={setAnnouncements} setFilteredAnnouncements={setFilteredAnnouncements} />
           </div>
 
           <Search
@@ -73,7 +67,8 @@ const AnnouncementsPage = () => {
         <Announcements
           announcements={filteredAnnouncements}
           loading={loadingAnnouncements}
-          setRefresh={setRefreshAnnouncement}
+          setAnnouncements={setAnnouncements}
+          setFilteredAnnouncements={setFilteredAnnouncements}
         />
       </div>
     </div>
