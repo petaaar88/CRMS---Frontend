@@ -42,7 +42,7 @@ const Partners = ({partners, loading, setRefresh}) => {
         "300px",
         "300px",
         "100px",
-        "100px",
+        "200px",
     ];
 
     return (
@@ -60,7 +60,7 @@ const Partners = ({partners, loading, setRefresh}) => {
                     widths={widths}
                     data={partners}
                     showData={showPartner}
-                    minWidth={"1800px"}
+                    minWidth={"1900px"}
                     loading={loading}
                 />
                 <EditPartner

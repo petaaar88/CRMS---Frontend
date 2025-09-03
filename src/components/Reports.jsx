@@ -36,10 +36,10 @@ const Reports = ({ reports, loading, setRefresh }) => {
   ];
 
   const widths = [
+    "220px",
     "200px",
-    "200px",
-    "400px",
-    "300px",
+    "150px",
+    "150px",
     "300px",
   ];
 

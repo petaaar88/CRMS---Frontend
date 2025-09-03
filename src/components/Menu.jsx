@@ -54,14 +54,14 @@ const Menu = () => {
         <>
 
             {isHamburgerMenuClicked && !isMdBreakpoint ?
-                <div className="bg-black/50 w-full h-full fixed z-2">
+                <div className="bg-black/50 w-full h-full fixed z-11">
                 </div>
 
                 : null
             }
 
             <nav ref={menuRef} style={{width: isLgBreakpoint ? "300px" : isMdBreakpoint ? "200px" : "100%"}}
-                 className={"z-3 bg-white dark:bg-dark-green shadow-xl fixed " + (isMdBreakpoint ? " h-screen  " : "")}>
+                 className={"z-11 bg-white dark:bg-dark-green shadow-xl fixed " + (isMdBreakpoint ? " h-screen  " : "")}>
                 <div className='h-full flex flex-col justify-between relative'>
 
                     <div>

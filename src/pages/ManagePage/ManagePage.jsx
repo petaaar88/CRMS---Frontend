@@ -57,8 +57,8 @@ const ManagePage = () => {
     return (
         <div>
             <Heading title={"Manage"}/>
-            <div className="dark:bg-dark-green rounded-xl p-6">
-                <div className="flex flex-col lg:flex-row justify-between ">
+            <div className="dark:bg-dark-green rounded-xl md:p-6">
+                <div className="flex flex-col lg:flex-row justify-between px-6 pt-6 md:p-0">
                     <div className="mb-4 lg:mb-0">
                         <CreateEmployee setRefresh={setRefreshEmployees}/>
                     </div>

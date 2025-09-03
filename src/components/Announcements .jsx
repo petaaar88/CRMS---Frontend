@@ -28,7 +28,7 @@ const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnn
     };
 
     const headers = ["Title", "Description", "Created At", "Attachment"];
-    const widths = ["200px", "400px", "200px", "200px"];
+    const widths = ["200px", "300px", "200px", "300px"];
 
     return (
         <>
@@ -45,7 +45,7 @@ const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnn
                     widths={widths}
                     data={announcements}
                     showData={showAnnouncement}
-                    minWidth={"900px"}
+                    minWidth={"1100px"}
                     loading={loading}
                 />
                 <AnnouncementDetails

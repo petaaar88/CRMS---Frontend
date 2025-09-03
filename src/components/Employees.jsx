@@ -43,7 +43,7 @@ const Employees = ({employees, loading, setRefresh}) => {
     ];
 
     const widths = [
-        "150px",
+        "200px",
         "150px",
         "150px",
         "150px",
@@ -66,7 +66,7 @@ const Employees = ({employees, loading, setRefresh}) => {
                     widths={widths}
                     data={employees}
                     showData={showEmployee}
-                    minWidth={"900px"}
+                    minWidth={"1100px"}
                     loading={loading}
                 />
                 <EmployeeDetails
