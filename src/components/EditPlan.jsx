@@ -3,7 +3,7 @@ import { useAuth } from "../contexts/AuthContext";
 import PlanForm from "./PlanForm.jsx";
 import FORM_TYPE from "../types/formType.js";
 
-const EditPlan = ({ handleClose, open, data, showMessage, setRefresh }) => {
+const EditPlan = ({ handleClose, open, data, showMessage, setPlans, setFilteredPlans }) => {
   const [newPlan, setNewPlan] = useState(data);
   const { accessToken } = useAuth();
   const [loadingUpdate, setLoadingUpdate] = useState(false);
@@ -42,7 +42,14 @@ const EditPlan = ({ handleClose, open, data, showMessage, setRefresh }) => {
 
       const responseData = await response.json();
       showMessage(responseData.message);
-      if (response.ok) setRefresh((prev) => !prev);
+      if (response.ok){
+        setPlans((prev) =>
+          prev.map((plan) => (plan.id === responseData.plan.id ? responseData.plan : plan))
+        );
+        setFilteredPlans((prev) =>
+          prev.map((plan) => (plan.id === responseData.plan.id ? responseData.plan : plan))
+        );
+      }
     } catch (error) {
       console.error(error);
       showMessage(error.message || "An error occurred.");
@@ -66,8 +73,13 @@ const EditPlan = ({ handleClose, open, data, showMessage, setRefresh }) => {
         }
       );
 
-      if (response.ok) setRefresh((prev) => !prev);
-      showMessage("Plan successfully deleted!");
+      if (response.ok){
+        setPlans((prev) => prev.filter((plan) => plan.id !== data.id));
+        setFilteredPlans((prev) => prev.filter((plan) => plan.id !== data.id));
+        showMessage("Plan successfully deleted!");
+      } else {
+        showMessage("Failed to delete plan.");
+      }
     } catch (error) {
       console.error(error);
       showMessage(error.message || "An error occurred.");

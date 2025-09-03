@@ -4,7 +4,7 @@ import PlanForm from "./PlanForm";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 
-const CreatePlan = ({ setRefresh }) => {
+const CreatePlan = ({ setPlans, setFilteredPlans }) => {
   const [newPlan, setNewPlan] = useState({
     institutionName: "",
     plannedVisitDate: "",
@@ -58,7 +58,8 @@ const CreatePlan = ({ setRefresh }) => {
           plannedVisitDate: "",
           plannedActivities: "",
         });
-        setRefresh((prev) => !prev);
+        setPlans((prev) => ([...prev,responseData.plan ]));
+        setFilteredPlans((prev) => ([...prev,responseData.plan ]));
       }
     } catch (error) {
       console.error(error);

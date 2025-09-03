@@ -5,7 +5,7 @@ import EditPlan from "../components/EditPlan";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 
-const Plans = ({ plans, loading, setRefresh }) => {
+const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompletion }) => {
   const [plan, setPlan] = useState(null);
   const [open, setOpen] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
@@ -47,7 +47,9 @@ const Plans = ({ plans, loading, setRefresh }) => {
     
     const responseData = await response.json();
     showMessage(responseData.message);
-    if (response.ok) setRefresh((prev) => !prev);
+    if (response.ok) 
+      updatePlansCompletion(planId, completed);
+
   } catch (error) {
     console.error(error);
     showMessage(error.message || "An error occurred.");
@@ -63,7 +65,7 @@ const Plans = ({ plans, loading, setRefresh }) => {
     "Planned activities",
     "Completed",
   ];
-  const widths = ["200px", "150px", "400px", "100px"];
+  const widths = ["300px", "200px", "300px", "200px"];
 
 
   return (
@@ -81,7 +83,7 @@ const Plans = ({ plans, loading, setRefresh }) => {
           widths={widths}
           data={plans}
           showData={showPlan}
-          minWidth={"900px"}
+          minWidth={"1100px"}
           loading={loading}
           containsComplitedField={true}
           handleCheck={handleCheck}
@@ -89,7 +91,8 @@ const Plans = ({ plans, loading, setRefresh }) => {
         />
         <EditPlan
           handleClose={handleClose}
-          setRefresh={setRefresh}
+          setPlans={setPlans}
+          setFilteredPlans={setFilteredPlans}
           open={open}
           data={plan}
           showMessage={showMessage}

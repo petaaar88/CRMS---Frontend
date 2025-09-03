@@ -4,7 +4,6 @@ import Search from "../../components/Search";
 import { useAuth } from "../../contexts/AuthContext";
 import FILTER_TYPE from "../../types/filterTypes";
 import CreatePlan from "../../components/CreatePlan";
-import useBreakpoints from "../../hooks/useBreakpoints";
 import Plans from "../../components/Plans";
 
 const PlansPage = () => {
@@ -12,10 +11,21 @@ const PlansPage = () => {
   const [filteredPlans, setFilteredPlans] = useState(null);
   const [loadingPlans, setLoadingPlans] = useState(false);
   const [errorPlans, setErrorPlans] = useState(null);
-  const [refreshPlans, setRefreshPlans] = useState(false);
 
   const { user, accessToken } = useAuth();
-  const { isLgBreakpoint } = useBreakpoints();
+
+  const updatePlansCompletion = (planId, isCompleted) => {
+    setPlans((prev) =>
+      prev.map((p) =>
+        p.id === planId ? { ...p, isCompleted } : p
+      )
+    );
+    setFilteredPlans((prev) =>
+      prev.map((p) =>
+        p.id === planId ? { ...p, isCompleted } : p
+      )
+    );
+  };
 
   const fetchPlans = async () => {
     setLoadingPlans(true);
@@ -50,17 +60,13 @@ const PlansPage = () => {
     fetchPlans();
   }, []);
 
-  useEffect(() => {
-    fetchPlans();
-  }, [refreshPlans]);
-
   return (
     <div>
       <Heading title={"Plans"} />
       <div className="dark:bg-dark-green rounded-xl p-6">
         <div className="flex flex-col lg:flex-row justify-between ">
           <div className="mb-4 lg:mb-0">
-            <CreatePlan setRefresh={setRefreshPlans} />
+            <CreatePlan setPlans={setPlans} setFilteredPlans={setFilteredPlans} />
           </div>
 
           <Search
@@ -73,7 +79,9 @@ const PlansPage = () => {
         <Plans
           plans={filteredPlans}
           loading={loadingPlans}
-          setRefresh={setRefreshPlans}
+          setPlans={setPlans}
+          setFilteredPlans={setFilteredPlans}
+          updatePlansCompletion={updatePlansCompletion}
         />
       </div>
     </div>
