@@ -47,7 +47,7 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
     };
 
     const headers = ["Description", "Posting Date", "Deadline", "Completed"];
-    const widths = ["150px", "150px", "400px", "100px"];
+    const widths = ["400px", "150px", "150px", "200px"];
 
     return (
         <>
@@ -64,7 +64,7 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
                     widths={widths}
                     data={assignments}
                     showData={() => null}
-                    minWidth={"900px"}
+                    minWidth={"1000px"}
                     loading={loading}
                     containsComplitedField={true}
                     handleCheck={handleCheck}

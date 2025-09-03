@@ -1,6 +1,7 @@
 ﻿import {CircularProgress} from "@mui/material";
 import {useState, useMemo, useContext} from "react";
 import {ThemeContext} from "../contexts/ThemeContext";
+import { truncateText } from "../utils/textUtils";
 
 const Table = ({
                    headers,
@@ -46,6 +47,7 @@ const Table = ({
         setSortConfig({key, direction});
     };
 
+
     return (
         <div className="flex flex-col gap-3 px-3" style={{width: "100%", minWidth: minWidth}}>
             <div
@@ -63,7 +65,6 @@ const Table = ({
                     </div>
                 ))}
             </div>
-
 
             {loading ? (
                 <div className="p-6 text-center bg-gray dark:bg-deep-green rounded-lg shadow">
@@ -85,7 +86,7 @@ const Table = ({
                 sortedData.map((row) => (
                     <div
                         key={row.id}
-                        className={"grid gap-4 items-center justify-around shadow rounded-lg p-4 cursor-pointer transition-colors bg-gray dark:bg-deep-green dark:hover:text-gray-400 dark:active:bg-dark-green text-center " + (row.isCompleted ? 'text-gray-300 dark:text-gray-500    bg-gray-600 dark:bg-gray-800' : "")}
+                        className={"grid gap-4 items-center justify-around shadow rounded-lg p-4 cursor-pointer transition-colors bg-gray dark:bg-deep-green dark:hover:text-gray-400 dark:active:bg-dark-green text-center " + (row.isCompleted ? 'text-gray-300 dark:text-gray-500 bg-gray-600 dark:bg-gray-800' : "")}
                         style={{gridTemplateColumns: widths.join(" ")}}
                         onClick={() => showData(row)}
                     >
@@ -97,7 +98,9 @@ const Table = ({
                                         handleCheck(row.id, !row[col])
                                     }} disabled={loadingCheckUpdate} readOnly checked={row[col]}/>
                                 ) : (
-                                    row[col]
+                                    <span title={typeof row[col] === 'string' && row[col].length > 100 ? row[col] : undefined}>
+                                        {truncateText(row[col])}
+                                    </span>
                                 )}
                             </div>
                         ))}

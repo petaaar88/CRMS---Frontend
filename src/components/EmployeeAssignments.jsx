@@ -56,7 +56,7 @@ const EmployeeAssignments = ({employeeId}) => {
     }, [refreshAssingments]);
 
     const headers = ["Description", "Posting Date", "Deadline", "Completed"];
-    const widths = ["150px", "150px", "400px", "100px"];
+    const widths = ["400px", "150px", "150px", "200px"];
 
     return (
         <>
@@ -77,7 +77,7 @@ const EmployeeAssignments = ({employeeId}) => {
                     widths={widths}
                     data={fetchedData}
                     showData={showAssignment}
-                    minWidth={"900px"}
+                    minWidth={"1000px"}
                     loading={loading}
                     containsComplitedField={true}
                     handleCheck={() => null}
