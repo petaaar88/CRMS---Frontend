@@ -2,9 +2,12 @@ import {useState} from "react";
 import Table from "../components/Table";
 import {Snackbar} from "@mui/material";
 import {useAuth} from "../contexts/AuthContext";
+import AssignmentDetails from "./AssignmentDetails";
 
 const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
     const [snackOpen, setSnackOpen] = useState(false);
+    const [openDetails, setOpenDetails] = useState(false);
+    const [assignmentDetails, setAssignmentDetails] = useState(null);
     const [snackMessage, setSnackMessage] = useState(null);
     const [loadingCheckUpdate, setLoadingCheckUpdate] = useState(false);
     const {accessToken} = useAuth();
@@ -12,6 +15,11 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
     const handleCloseSnack = () => {
         setSnackOpen(false);
     };
+
+    const showAssignmentDetails = (assignmentDetails) =>{
+        setOpenDetails(true);
+        setAssignmentDetails(assignmentDetails);
+    }
 
     const showMessage = (message) => {
         setSnackMessage(message);
@@ -63,12 +71,18 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
                     headers={headers}
                     widths={widths}
                     data={assignments}
-                    showData={() => null}
+                    showData={showAssignmentDetails}
                     minWidth={"1000px"}
                     loading={loading}
                     containsComplitedField={true}
                     handleCheck={handleCheck}
                     loadingCheckUpdate={loadingCheckUpdate}
+                />
+                <AssignmentDetails
+                    handleClose={() => setOpenDetails(false)}
+                    open={openDetails}
+                    data={assignmentDetails}
+                    canEdit={false}
                 />
             </div>
             <Snackbar

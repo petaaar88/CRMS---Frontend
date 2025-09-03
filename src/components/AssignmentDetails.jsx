@@ -11,6 +11,7 @@ const AssignmentDetails = ({
                                data,
                                showMessage,
                                setRefresh,
+                               canEdit = false
                            }) => {
     const {isSmBreakpoint} = useBreakpoints();
     const {accessToken} = useAuth();
@@ -88,10 +89,12 @@ const AssignmentDetails = ({
                         </div>
                     </div>
                 </div>
-                <button
+                {
+                    canEdit &&
+                    <button
                     className="bg-menu-button-light order-2 sm:order-1 dark:bg-dark-green dark:active:bg-darker-green cursor-pointer text-red-600 dark:text-red-600 disabled:bg-gray-700 dark:disabled:bg-gray-700 py-2 px-7 rounded-md font-bold shadow-md"
                     disabled={loadingDelete} onClick={async () => handleDelete()}>{loadingDelete ? (
-                    <div className="flex justify-center items-center">
+                        <div className="flex justify-center items-center">
                         <CircularProgress
                             size={20}
                             sx={{
@@ -99,12 +102,13 @@ const AssignmentDetails = ({
                                     theme === "dark"
                                         ? "var(--color-menu-button-dark)"
                                         : "var(--color-button-light-green)",
-                            }}
+                                    }}
                         />
-                    </div>
-                ) : (
-                    "Delete"
-                )}</button>
+                        </div>
+                    ) : (
+                        "Delete"
+                    )}</button>
+                }
             </DialogContent>
         </Dialog>
     );

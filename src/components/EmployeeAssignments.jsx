@@ -88,6 +88,7 @@ const EmployeeAssignments = ({employeeId}) => {
                     open={openDetails}
                     data={assignment}
                     showMessage={showMessage}
+                    canEdit={true}
                 />
                 <Snackbar
                     anchorOrigin={{vertical: "bottom", horizontal: "right"}}
