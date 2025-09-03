@@ -17,7 +17,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (!loading && accessToken) {
-            navigate("/reports");
+            navigate("/");
         }
     }, [accessToken, loading]);
 
