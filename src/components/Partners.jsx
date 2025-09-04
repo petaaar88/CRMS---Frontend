@@ -4,6 +4,7 @@ import Table from "../components/Table"
 import EditPartner from "../components/EditPartner";
 import {Snackbar} from "@mui/material";
 import PartnerDetails from "./PartnerDetails";
+import TableContainer from "./TableContainer";
 
 const Partners = ({partners, loading, setRefresh}) => {
     const [partner, setPartner] = useState(null);
@@ -47,14 +48,7 @@ const Partners = ({partners, loading, setRefresh}) => {
 
     return (
         <>
-            <div
-                className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green  px-3 py-4 rounded-xl"
-                style={{
-                    width: "100%",
-                    overflow: "auto",
-                    height: "calc(100vh - 250px)",
-                }}
-            >
+            <TableContainer>
                 <Table
                     headers={headers}
                     widths={widths}
@@ -72,7 +66,7 @@ const Partners = ({partners, loading, setRefresh}) => {
                     open={openEdit}
                     data={partner}
                     showMessage={showMessage}
-                />
+                    />
                 <PartnerDetails
                     handleClose={() => setOpenDetails(false)}
                     open={openDetails}
@@ -80,7 +74,7 @@ const Partners = ({partners, loading, setRefresh}) => {
                     canEdit={true}
                     setOpenEdit={setOpenEdit}
                 />
-            </div>
+            </TableContainer>
             <Snackbar
                 anchorOrigin={{vertical: "bottom", horizontal: "right"}}
                 open={snackOpen}
