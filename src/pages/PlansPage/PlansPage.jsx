@@ -5,7 +5,6 @@ import { useAuth } from "../../contexts/AuthContext";
 import FILTER_TYPE from "../../types/filterTypes";
 import CreatePlan from "../../components/CreatePlan";
 import Plans from "../../components/Plans";
-import TablePagination from '@mui/material/TablePagination';
 import usePagination from "../../hooks/usePagination";
 import Pagination from "../../components/Pagination";
 
@@ -17,7 +16,6 @@ const PlansPage = () => {
 
   const { user, accessToken } = useAuth();
 
-  // Koristimo custom hook za paginaciju
   const {
     page,
     rowsPerPage,
