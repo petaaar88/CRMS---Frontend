@@ -1,5 +1,4 @@
 ﻿import {Dialog, DialogContent} from "@mui/material"
-import useBreakpoints from "../hooks/useBreakpoints"
 import CloseIcon from "@mui/icons-material/Close";
 
 import {ThemeContext} from "../contexts/ThemeContext";
@@ -34,17 +33,17 @@ const PartnerDetails = ({open, handleClose, canEdit, data, setOpenEdit}) => {
                 </h3>
                 <div className="text-black dark:text-white text-xl flex flex-col md:flex-row md:gap-8">
                     <div>
-                        <p><span className="font-bold">Institution Name: </span> {data?.institutionName}</p>
-                        <p><span className="font-bold">Institution Type: </span> {data?.institutionType}</p>
-                        <p><span className="font-bold">Contact Person Full Name: </span> {data?.contractPersonFullName}
+                        <p><span className="text-gray-600 dark:text-gray-400 font-bold">Institution Name: </span> {data?.institutionName}</p>
+                        <p><span className="text-gray-600 dark:text-gray-400 font-bold">Institution Type: </span> {data?.institutionType}</p>
+                        <p><span className="text-gray-600 dark:text-gray-400 font-bold">Contact Person Full Name: </span> {data?.contractPersonFullName}
                         </p>
-                        <p><span className="font-bold">Contact Person Position: </span> {data?.contractPersonPosition}
+                        <p><span className="text-gray-600 dark:text-gray-400 font-bold">Contact Person Position: </span> {data?.contractPersonPosition}
                         </p>
                     </div>
                     <div>
-                        <p><span className="font-bold">Address: </span> {data?.address}</p>
-                        <p><span className="font-bold">City: </span> {data?.city}</p>
-                        <p><span className="font-bold">Collaboration Score: </span> {data?.collaborationScore}</p>
+                        <p><span className="text-gray-600 dark:text-gray-400 font-bold">Address: </span> {data?.address}</p>
+                        <p><span className="text-gray-600 dark:text-gray-400 font-bold">City: </span> {data?.city}</p>
+                        <p><span className="text-gray-600 dark:text-gray-400 font-bold">Collaboration Score: </span> {data?.collaborationScore}</p>
                     </div>
                 </div>
 

@@ -1,11 +1,19 @@
-﻿import {useEffect} from "react";
+﻿import {useEffect, useState} from "react";
 import {useAuth} from "../contexts/AuthContext";
 import useFetch from "../hooks/useFetch";
 import Table from "./Table";
+import ReportDetails from "./ReportDetails";
 
 const EmployeeReports = ({employeeId}) => {
     const {fetchedData, fetchData, loading} = useFetch();
     const {accessToken} = useAuth();
+    const [openDetails, setOpenDetails] = useState(false);
+    const [reportDetails, setReportDetails] = useState(null);
+
+    const showDetails = (reportDetails) =>{
+        setOpenDetails(true);
+        setReportDetails(reportDetails)
+    }
 
     useEffect(() => {
         if (employeeId)
@@ -50,9 +58,16 @@ const EmployeeReports = ({employeeId}) => {
                 headers={headers}
                 widths={widths}
                 data={fetchedData}
-                showData={() => null}
+                showData={showDetails}
                 minWidth={"1800px"}
                 loading={loading}
+            />
+            <ReportDetails
+                open={openDetails}
+                handleClose={() => setOpenDetails(false)}
+                canEdit={false}
+                data={reportDetails}
+
             />
         </div>
     )

@@ -5,10 +5,12 @@ import EditPlan from "../components/EditPlan";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 import TableContainer from "./TableContainer";
+import PlanDetails from "./PlanDetails";
 
 const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompletion }) => {
   const [plan, setPlan] = useState(null);
   const [open, setOpen] = useState(false);
+  const [openDetails, setOpenDetails] = useState(false);
   const [snackOpen, setSnackOpen] = useState(false);
   const [snackMessage, setSnackMessage] = useState(null);
   const [loadingCheckUpdate, setLoadingCheckUpdate] = useState(false)
@@ -16,10 +18,11 @@ const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompleti
 
   const handleClose = () => {
     setOpen(false);
+    setOpenDetails(false)
   };
 
   const showPlan = (plan) => {
-    setOpen(true);
+    setOpenDetails(true);
     setPlan(plan);
   };
 
@@ -35,29 +38,29 @@ const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompleti
   const handleCheck = async(planId, completed) =>{
 
     try {
-    setLoadingCheckUpdate(true);
-    const response = await fetch(
-      import.meta.env.VITE_API_URL + `/api/plans/${planId}/completion?completed=${completed}`,
-      {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${accessToken}`
-        }
-      }
-    );
-    
-    const responseData = await response.json();
-    showMessage(responseData.message);
-    if (response.ok) 
-      updatePlansCompletion(planId, completed);
+      setLoadingCheckUpdate(true);
+      const response = await fetch(
+          import.meta.env.VITE_API_URL + `/api/plans/${planId}/completion?completed=${completed}`,
+          {
+            method: "PATCH",
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          }
+      );
 
-  } catch (error) {
-    console.error(error);
-    showMessage(error.message || "An error occurred.");
-  }
+      const responseData = await response.json();
+      showMessage(responseData.message);
+      if (response.ok)
+        updatePlansCompletion(planId, completed);
 
-  setLoadingCheckUpdate(false);
-  
+    } catch (error) {
+      console.error(error);
+      showMessage(error.message || "An error occurred.");
+    }
+
+    setLoadingCheckUpdate(false);
+
   }
 
   const headers = [
@@ -70,36 +73,42 @@ const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompleti
 
 
   return (
-    <>
-      <TableContainer>
-        <Table
-          headers={headers}
-          widths={widths}
-          data={plans}
-          showData={showPlan}
-          minWidth={"1100px"}
-          loading={loading}
-          containsComplitedField={true}
-          handleCheck={handleCheck}
-          loadingCheckUpdate={loadingCheckUpdate}
+      <>
+        <TableContainer>
+          <Table
+              headers={headers}
+              widths={widths}
+              data={plans}
+              showData={showPlan}
+              minWidth={"1100px"}
+              loading={loading}
+              containsComplitedField={true}
+              handleCheck={handleCheck}
+              loadingCheckUpdate={loadingCheckUpdate}
+          />
+          <PlanDetails
+              handleClose={()=> setOpenDetails(false)}
+              open={openDetails}
+              data={plan}
+              openEdit={()=>setOpen(true)}
+          />
+          <EditPlan
+              handleClose={handleClose}
+              setPlans={setPlans}
+              setFilteredPlans={setFilteredPlans}
+              open={open}
+              data={plan}
+              showMessage={showMessage}
+          />
+        </TableContainer>
+        <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            open={snackOpen}
+            autoHideDuration={4000}
+            onClose={handleCloseSnack}
+            message={snackMessage}
         />
-        <EditPlan
-          handleClose={handleClose}
-          setPlans={setPlans}
-          setFilteredPlans={setFilteredPlans}
-          open={open}
-          data={plan}
-          showMessage={showMessage}
-        />
-      </TableContainer>
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        open={snackOpen}
-        autoHideDuration={4000}
-        onClose={handleCloseSnack}
-        message={snackMessage}
-        />
-    </>
+      </>
   );
 };
 

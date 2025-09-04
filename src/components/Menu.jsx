@@ -11,6 +11,7 @@ import LightCloseIcon from "../assets/close-light.png";
 import UserBadge from './UserBadge'
 import {useAuth} from '../contexts/AuthContext'
 import USER_ROLES from '../types/userRoles'
+import LogoutButton from './LogoutButton'
 
 const Menu = () => {
 
@@ -84,7 +85,7 @@ const Menu = () => {
                                 <ul onClick={handleClick}>
                                     <li><NavLink style={navStyle}
                                                  className={'block w-full text-center py-3 text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
-                                                 to={"/home"}>Home</NavLink></li>
+                                                 to={"/"}>Home</NavLink></li>
                                     <li><NavLink style={navStyle}
                                                  className={'block w-full text-center py-3 px-2 whitespace-pre-line text-lg text-black dark:text-white cursor-pointer hover:bg-light-gray text-black-500 dark:hover:bg-forest-green'}
                                                  to={"/partners-and-reports"}>Partners And Reports</NavLink></li>
@@ -110,7 +111,15 @@ const Menu = () => {
                                         : null
                                     }
                                     {!isMdBreakpoint ?
-                                        <li className='flex justify-center mt-4 mb-7'><ThemeButton/></li> : null}
+                                        <li className='flex justify-center mt-4 mb-7'>
+                                            <div className="flex items-center justify-around w-full">
+                                                <ThemeButton/>
+                                                <div>
+                                                    <LogoutButton/>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        : null}
                                 </ul>
                                 :
                                 null

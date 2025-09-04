@@ -23,3 +23,27 @@
   --color-menu-button-dark: #5CF8AA;
   --color-menu-button-light: #50BF30;
 }
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: theme('colors.gray.200');
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.gray.500');
+    border-radius: 9999px;
+  }
+
+  :where([data-theme=dark], [data-theme=dark] *)::-webkit-scrollbar-track {
+    background: theme('colors.gray.800');
+  }
+
+  :where([data-theme=dark], [data-theme=dark] *)::-webkit-scrollbar-thumb {
+    background: theme('colors.gray.600');
+  }
+}

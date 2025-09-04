@@ -60,7 +60,7 @@ const EmployeeAssignments = ({employeeId}) => {
 
     return (
         <>
-            <div className="mt-3 text-white">
+            <div className="mt-3 text-white ms-5">
                 <CreateAssignment employeeId={employeeId} setRefresh={setRefreshAssingments}/>
             </div>
 
