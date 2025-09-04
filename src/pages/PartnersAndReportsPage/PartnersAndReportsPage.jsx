@@ -8,7 +8,7 @@ import CreatePartner from "../../components/CreatePartner";
 import useBreakpoints from "../../hooks/useBreakpoints";
 import Reports from "../../components/Reports";
 import CreateReport from "../../components/CreateReport";
-
+//asdfasdfasfasfasdf
 const PartnersAndReportsPage = () => {
   const PAGES = {
     PARTNERS: 1,
