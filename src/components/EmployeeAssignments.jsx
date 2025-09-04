@@ -55,7 +55,7 @@ const EmployeeAssignments = ({employeeId}) => {
             );
     }, [refreshAssingments]);
 
-    const headers = ["Description", "Posting Date", "Deadline", "Completed"];
+    const headers = ["Description", "Deadline", "Posting Date", "Completed"];
     const widths = ["400px", "150px", "150px", "200px"];
 
     return (

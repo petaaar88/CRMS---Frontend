@@ -2,6 +2,7 @@ import {useState} from "react";
 import Table from "../components/Table";
 import {Snackbar} from "@mui/material";
 import AnnouncementDetails from "./AnnouncementDetails";
+import TableContainer from "./TableContainer";
 
 const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnnouncements}) => {
     const [announcement, setAnnouncement] = useState(null);
@@ -32,14 +33,7 @@ const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnn
 
     return (
         <>
-            <div
-                className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green px-3 py-4 rounded-xl"
-                style={{
-                    width: "100%",
-                    overflow: "auto",
-                    height: "calc(100vh - 250px)",
-                }}
-            >
+            <TableContainer>
                 <Table
                     headers={headers}
                     widths={widths}
@@ -56,7 +50,8 @@ const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnn
                     data={announcement}
                     showMessage={showMessage}
                 />
-            </div>
+            </TableContainer>
+
             <Snackbar
                 anchorOrigin={{vertical: "bottom", horizontal: "right"}}
                 open={snackOpen}

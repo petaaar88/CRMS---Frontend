@@ -8,6 +8,8 @@ import CreatePartner from "../../components/CreatePartner";
 import useBreakpoints from "../../hooks/useBreakpoints";
 import Reports from "../../components/Reports";
 import CreateReport from "../../components/CreateReport";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
 
 const PartnersAndReportsPage = () => {
   const PAGES = {
@@ -30,6 +32,15 @@ const PartnersAndReportsPage = () => {
 
   const { user, accessToken } = useAuth();
   const { isLgBreakpoint } = useBreakpoints();
+
+    const {
+    page,
+    rowsPerPage,
+    paginatedData,
+    totalCount,
+    handleChangePage,
+    handleChangeRowsPerPage
+  } = usePagination(currentPage === PAGES.PARTNERS ? filteredPartners : filteredReports, 10);
 
   const fetchPartners = async () => {
     setLoadingPartners(true);
@@ -177,17 +188,24 @@ const PartnersAndReportsPage = () => {
         </div>
         {currentPage === PAGES.PARTNERS ? (
           <Partners
-            partners={filteredPartners}
+            partners={paginatedData || []}
             loading={loadingPartners}
             setRefresh={setRefreshPartners}
           />
         ) : (
           <Reports
-            reports={filteredReports}
+            reports={paginatedData || []}
             loading={loadingReports}
             setRefresh={setRefreshReports}
           />
         )}
+        <Pagination 
+          totalCount={totalCount} 
+          page={page} 
+          handleChangePage={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+        />
       </div>
     </div>
   );

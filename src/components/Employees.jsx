@@ -4,6 +4,7 @@ import Table from "../components/Table";
 import EditEmployee from "../components/EditEmployee";
 import {Snackbar} from "@mui/material";
 import EmployeeDetails from "./EmployeeDetails";
+import TableContainer from "./TableContainer";
 
 const Employees = ({employees, loading, setRefresh}) => {
     const [employeeDetails, setEmployeeDetails] = useState(null);
@@ -53,14 +54,7 @@ const Employees = ({employees, loading, setRefresh}) => {
 
     return (
         <>
-            <div
-                className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green px-3 py-4 rounded-xl"
-                style={{
-                    width: "100%",
-                    overflow: "auto",
-                    height: "calc(100vh - 250px)",
-                }}
-            >
+            <TableContainer>
                 <Table
                     headers={headers}
                     widths={widths}
@@ -86,7 +80,7 @@ const Employees = ({employees, loading, setRefresh}) => {
                     data={editEmployee}
                     showMessage={showMessage}
                 />
-            </div>
+            </TableContainer>
 
             <Snackbar
                 anchorOrigin={{vertical: "bottom", horizontal: "right"}}

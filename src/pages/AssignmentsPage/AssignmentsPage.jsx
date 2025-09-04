@@ -5,6 +5,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import FILTER_TYPE from "../../types/filterTypes";
 import Assignments from "../../components/Assignments";
 import useFetch from "../../hooks/useFetch";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
 
 const AssignmentsPage = () => {
   const [assignments, setAssignments] = useState(null);
@@ -13,6 +15,15 @@ const AssignmentsPage = () => {
 
   const { user, accessToken } = useAuth();
   const { fetchedData, loading, error, fetchData } = useFetch();
+
+  const {
+    page,
+    rowsPerPage,
+    paginatedData,
+    totalCount,
+    handleChangePage,
+    handleChangeRowsPerPage
+  } = usePagination(filteredAssignments, 10);
 
   const fetchAssignments = async () => {
     await fetchData(import.meta.env.VITE_API_URL + `/api/assignments/${user.id}`, {
@@ -61,10 +72,17 @@ const AssignmentsPage = () => {
         </div>
 
         <Assignments
-          assignments={filteredAssignments}
+          assignments={paginatedData || []}
           loading={loading}
-          updateAssignmentCompletion={updateAssignmentCompletion} // 👉 prosledjuje se
+          updateAssignmentCompletion={updateAssignmentCompletion}
           error={error}
+        />
+        <Pagination 
+          totalCount={totalCount} 
+          page={page} 
+          handleChangePage={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </div>
     </div>

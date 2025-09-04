@@ -2,6 +2,7 @@ import { Snackbar } from "@mui/material";
 import { useState } from "react";
 import Table from "./Table";
 import EditReport from "./EditReport";
+import TableContainer from "./TableContainer";
 
 const Reports = ({ reports, loading, setRefresh }) => {
   const [report, setReport] = useState(null);
@@ -45,14 +46,7 @@ const Reports = ({ reports, loading, setRefresh }) => {
 
   return(
     <>
-      <div
-        className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green  px-3 py-4 rounded-xl"
-        style={{
-          width: "100%",
-          overflow: "auto",
-          height: "calc(100vh - 250px)",
-        }}
-      >
+      <TableContainer>
         <Table
           headers={headers}
           widths={widths}
@@ -69,7 +63,7 @@ const Reports = ({ reports, loading, setRefresh }) => {
           showMessage={showMessage}
         />
         
-      </div>
+      </TableContainer>
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={snackOpen}

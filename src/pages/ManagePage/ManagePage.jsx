@@ -5,6 +5,8 @@ import Search from "../../components/Search";
 import {useAuth} from "../../contexts/AuthContext";
 import FILTER_TYPE from "../../types/filterTypes";
 import CreateEmployee from "../../components/CreateEmployee";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
 
 const ManagePage = () => {
 
@@ -15,6 +17,15 @@ const ManagePage = () => {
     const [refreshEmployees, setRefreshEmployees] = useState(false);
 
     const {accessToken} = useAuth();
+
+      const {
+        page,
+        rowsPerPage,
+        paginatedData,
+        totalCount,
+        handleChangePage,
+        handleChangeRowsPerPage
+        } = usePagination(filteredEmployees, 10);
 
     const fetchEmployees = async () => {
         setLoadingEmployees(true);
@@ -71,9 +82,16 @@ const ManagePage = () => {
                 </div>
 
                 <Employees
-                    employees={filteredEmployees}
+                    employees={paginatedData || []}
                     loading={loadingEmployees}
                     setRefresh={setRefreshEmployees}
+                />
+                <Pagination 
+                    totalCount={totalCount} 
+                    page={page} 
+                    handleChangePage={handleChangePage}
+                    rowsPerPage={rowsPerPage}
+                    handleChangeRowsPerPage={handleChangeRowsPerPage}
                 />
             </div>
         </div>

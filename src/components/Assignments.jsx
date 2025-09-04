@@ -3,6 +3,7 @@ import Table from "../components/Table";
 import {Snackbar} from "@mui/material";
 import {useAuth} from "../contexts/AuthContext";
 import AssignmentDetails from "./AssignmentDetails";
+import TableContainer from "./TableContainer";
 
 const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
     const [snackOpen, setSnackOpen] = useState(false);
@@ -54,19 +55,12 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
         }
     };
 
-    const headers = ["Description", "Posting Date", "Deadline", "Completed"];
+    const headers = ["Description", "Deadline", "Posting Date", "Completed"];
     const widths = ["400px", "150px", "150px", "200px"];
 
     return (
         <>
-            <div
-                className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green px-3 py-4 rounded-xl"
-                style={{
-                    width: "100%",
-                    overflow: "auto",
-                    height: "calc(100vh - 250px)",
-                }}
-            >
+            <TableContainer>
                 <Table
                     headers={headers}
                     widths={widths}
@@ -84,7 +78,8 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
                     data={assignmentDetails}
                     canEdit={false}
                 />
-            </div>
+            </TableContainer>
+
             <Snackbar
                 anchorOrigin={{vertical: "bottom", horizontal: "right"}}
                 open={snackOpen}

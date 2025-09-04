@@ -6,6 +6,8 @@ import FILTER_TYPE from "../../types/filterTypes";
 import useBreakpoints from "../../hooks/useBreakpoints";
 import Announcements from "../../components/Announcements ";
 import CreateAnnouncement from "../../components/CreateAnnouncement";
+import Pagination from "../../components/Pagination";
+import usePagination from "../../hooks/usePagination";
 
 const AnnouncementsPage = () => {
   const [announcements, setAnnouncements] = useState(null);
@@ -14,6 +16,15 @@ const AnnouncementsPage = () => {
   const [errorAnnouncements, setErrorAnnouncements] = useState(null);
 
   const { accessToken } = useAuth();
+
+  const {
+    page,
+    rowsPerPage,
+    paginatedData,
+    totalCount,
+    handleChangePage,
+    handleChangeRowsPerPage
+  } = usePagination(filteredAnnouncements, 10);
 
   const fetchAnnouncements = async () => {
     setLoadingAnnouncements(true);
@@ -65,10 +76,17 @@ const AnnouncementsPage = () => {
         </div>
 
         <Announcements
-          announcements={filteredAnnouncements}
+          announcements={paginatedData || []}
           loading={loadingAnnouncements}
           setAnnouncements={setAnnouncements}
           setFilteredAnnouncements={setFilteredAnnouncements}
+        />
+        <Pagination 
+          totalCount={totalCount} 
+          page={page} 
+          handleChangePage={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </div>
     </div>
