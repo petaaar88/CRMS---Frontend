@@ -5,6 +5,9 @@ import { useAuth } from "../../contexts/AuthContext";
 import FILTER_TYPE from "../../types/filterTypes";
 import CreatePlan from "../../components/CreatePlan";
 import Plans from "../../components/Plans";
+import TablePagination from '@mui/material/TablePagination';
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
 
 const PlansPage = () => {
   const [plans, setPlans] = useState(null);
@@ -13,6 +16,16 @@ const PlansPage = () => {
   const [errorPlans, setErrorPlans] = useState(null);
 
   const { user, accessToken } = useAuth();
+
+  // Koristimo custom hook za paginaciju
+  const {
+    page,
+    rowsPerPage,
+    paginatedData,
+    totalCount,
+    handleChangePage,
+    handleChangeRowsPerPage
+  } = usePagination(filteredPlans, 10);
 
   const updatePlansCompletion = (planId, isCompleted) => {
     setPlans((prev) =>
@@ -75,13 +88,20 @@ const PlansPage = () => {
             filters={[FILTER_TYPE.DATE]}
           />
         </div>
-
+      
         <Plans
-          plans={filteredPlans}
+          plans={paginatedData || []}
           loading={loadingPlans}
           setPlans={setPlans}
           setFilteredPlans={setFilteredPlans}
           updatePlansCompletion={updatePlansCompletion}
+        />
+        <Pagination 
+          totalCount={totalCount} 
+          page={page} 
+          handleChangePage={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </div>
     </div>

@@ -4,6 +4,7 @@ import Table from "../components/Table";
 import EditPlan from "../components/EditPlan";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
+import TableContainer from "./TableContainer";
 
 const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompletion }) => {
   const [plan, setPlan] = useState(null);
@@ -70,14 +71,7 @@ const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompleti
 
   return (
     <>
-      <div
-        className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green px-3 py-4 rounded-xl"
-        style={{
-          width: "100%",
-          overflow: "auto",
-          height: "calc(100vh - 250px)",
-        }}
-      >
+      <TableContainer>
         <Table
           headers={headers}
           widths={widths}
@@ -97,14 +91,14 @@ const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompleti
           data={plan}
           showMessage={showMessage}
         />
-      </div>
+      </TableContainer>
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         open={snackOpen}
         autoHideDuration={4000}
         onClose={handleCloseSnack}
         message={snackMessage}
-      />
+        />
     </>
   );
 };
