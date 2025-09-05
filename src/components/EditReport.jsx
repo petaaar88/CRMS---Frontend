@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import ReportForm from "./ReportForm.jsx";
 import FORM_TYPE from "../types/formType.js";
+import { checkTextLength } from "../utils/textUtils.js";
 
 const EditReport = ({ handleClose, open, data, showMessage, setRefresh }) => {
 
@@ -16,6 +17,22 @@ const EditReport = ({ handleClose, open, data, showMessage, setRefresh }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!checkTextLength(newReport.institutionName,2)){
+            showMessage("Institution Name must be at least 2 characters long!");
+            return;
+        }
+
+        if(!checkTextLength(newReport.firstAndLastNameOfSalesRepresentative,2)){
+            showMessage("Sales representative name must be at least 2 characters long!");
+            return;
+        }
+
+        if(!checkTextLength(newReport.reportText,3)){
+            showMessage("Report must be at least 3 characters long!");
+            return;
+        }
+        
 
         let sanitizedData = {};
 

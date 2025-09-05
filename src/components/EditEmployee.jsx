@@ -2,6 +2,7 @@
 import {useAuth} from "../contexts/AuthContext";
 import EmployeeForm from "./EmployeeForm.jsx";
 import FORM_TYPE from "../types/formType.js";
+import { checkTextLength, isNumeric, isPhoneNumber } from "../utils/textUtils.js";
 
 const EditEmployee = ({handleClose, open, data, showMessage, setRefresh}) => {
     const [newEmployee, setNewEmployee] = useState(data);
@@ -15,6 +16,37 @@ const EditEmployee = ({handleClose, open, data, showMessage, setRefresh}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!checkTextLength(newEmployee.firstName,2)){
+            showMessage("First Name must be at least 2 characters long!");
+            return;
+        }
+
+        if(!checkTextLength(newEmployee.lastName,2)){
+            showMessage("Last Name must be at least 2 characters long!");
+            return;
+        }
+
+        if(!isNumeric(newEmployee.umcn)){
+            showMessage("UMCN must consist of digits only!");
+            return;
+        }
+
+        if(!checkTextLength(newEmployee.username, 4)){
+            showMessage("Username must be at least 4 characters long!");
+            return;
+        }
+
+        if(!checkTextLength(newEmployee.password, 5)){
+            showMessage("Password must be at least 4 characters long!");
+            return;
+        }
+
+         if(!isPhoneNumber(newEmployee.phoneNumber)){
+            showMessage("Invalid phone number format");
+            return;
+        }
+
 
         let sanitizedData = {};
         Object.entries(newEmployee).forEach(([key, value]) => {

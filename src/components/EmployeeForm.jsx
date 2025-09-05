@@ -58,6 +58,8 @@ const EmployeeForm = ({
                         placeholder="UMCN"
                         value={newEmployee?.umcn || ""}
                         onChange={handleChange}
+                        minLength={13}
+                        maxLength={13}
                         required
                     />
 
@@ -69,6 +71,8 @@ const EmployeeForm = ({
                             placeholder="First Name"
                             value={newEmployee?.firstName || ""}
                             onChange={handleChange}
+                            minLength={2}
+                            maxLength={15}
                             required
                         />
                         <input
@@ -78,6 +82,8 @@ const EmployeeForm = ({
                             placeholder="Last Name"
                             value={newEmployee?.lastName || ""}
                             onChange={handleChange}
+                            minLength={2}
+                            maxLength={15}
                             required
                         />
                     </div>
@@ -89,6 +95,8 @@ const EmployeeForm = ({
                         placeholder="Username"
                         value={newEmployee?.username || ""}
                         onChange={handleChange}
+                        minLength={4}
+                        maxLength={15}
                         required
                     />
 
@@ -99,6 +107,8 @@ const EmployeeForm = ({
                         placeholder="Password"
                         value={newEmployee?.password || ""}
                         onChange={handleChange}
+                        minLength={5}
+                        maxLength={15}
                         required
                     />
 
@@ -109,6 +119,9 @@ const EmployeeForm = ({
                         placeholder="Phone Number"
                         value={newEmployee?.phoneNumber || ""}
                         onChange={handleChange}
+                        minLength={5}
+                        maxLength={15}
+                        required
                     />
 
                     <div className="flex justify-end gap-3 mt-5">

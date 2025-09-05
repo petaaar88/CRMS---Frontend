@@ -3,6 +3,7 @@ import FORM_TYPE from "../types/formType";
 import AnnouncementForm from "./AnnouncementForm";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
+import { checkTextLength } from "../utils/textUtils";
 
 const CreateAnnouncement = ({ setAnnouncements, setFilteredAnnouncements }) => {
   const [newAnnouncement, setNewAnnouncement] = useState({
@@ -31,6 +32,16 @@ const CreateAnnouncement = ({ setAnnouncements, setFilteredAnnouncements }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!checkTextLength(newAnnouncement.title,3)){
+      showMessage("Title must be at least 3 characters long!");
+      return;
+    }
+
+    if(!checkTextLength(newAnnouncement.description,3)){
+      showMessage("Description must be at least 3 characters long!");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("title", newAnnouncement.title.trim());

@@ -55,6 +55,8 @@ const AssignmentForm = ({
                 value={newAssignment?.description || ""}
                 onChange={handleChange}
                 rows={4}
+                minLength={5}
+                maxLength={1200}
                 required
             />
                     </div>

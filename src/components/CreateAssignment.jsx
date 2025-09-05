@@ -2,6 +2,7 @@
 import AssignmentForm from "./AssignmentForm";
 import {Snackbar} from "@mui/material";
 import {useAuth} from "../contexts/AuthContext";
+import { checkTextLength } from "../utils/textUtils";
 
 const CreateAssignment = ({employeeId, setRefresh}) => {
     const [newAssignment, setNewAssignment] = useState({
@@ -29,6 +30,11 @@ const CreateAssignment = ({employeeId, setRefresh}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!checkTextLength(newAssignment.description,5)){
+            showMessage("Description must be at least 2 characters long!");
+            return;
+        }
 
         const sanitizedData = {
             description: newAssignment.description.trim(),

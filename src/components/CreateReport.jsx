@@ -3,6 +3,7 @@ import FORM_TYPE from "../types/formType";
 import ReportForm from "./ReportForm";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
+import { checkTextLength } from "../utils/textUtils";
 
 const CreateReport = ({ setRefresh }) => {
   const [newReport, setNewReport] = useState({
@@ -34,6 +35,21 @@ const CreateReport = ({ setRefresh }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+     if(!checkTextLength(newReport.institutionName,2)){
+          showMessage("Institution Name must be at least 2 characters long!");
+          return;
+      }
+
+      if(!checkTextLength(newReport.firstAndLastNameOfSalesRepresentative,2)){
+          showMessage("Sales representative name must be at least 2 characters long!");
+          return;
+      }
+
+      if(!checkTextLength(newReport.reportText,3)){
+          showMessage("Report must be at least 3 characters long!");
+          return;
+      }
 
     let sanitizedData = {};
     Object.entries(newReport).forEach(([key, value]) => {

@@ -2,6 +2,7 @@
 import EmployeeForm from "./EmployeeForm";
 import {Snackbar} from "@mui/material";
 import {useAuth} from "../contexts/AuthContext";
+import { checkTextLength, isNumeric, isPhoneNumber } from "../utils/textUtils";
 
 const CreateEmployee = ({setRefresh}) => {
     const [newEmployee, setNewEmployee] = useState({
@@ -34,6 +35,36 @@ const CreateEmployee = ({setRefresh}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!checkTextLength(newEmployee.firstName,2)){
+            showMessage("First Name must be at least 2 characters long!");
+            return;
+        }
+
+        if(!checkTextLength(newEmployee.lastName,2)){
+            showMessage("Last Name must be at least 2 characters long!");
+            return;
+        }
+
+        if(!isNumeric(newEmployee.umcn)){
+            showMessage("UMCN must consist of digits only!");
+            return;
+        }
+
+        if(!checkTextLength(newEmployee.username, 4)){
+            showMessage("Username must be at least 4 characters long!");
+            return;
+        }
+
+        if(!checkTextLength(newEmployee.password, 5)){
+            showMessage("Password must be at least 4 characters long!");
+            return;
+        }
+
+         if(!isPhoneNumber(newEmployee.phoneNumber)){
+            showMessage("Invalid phone number format");
+            return;
+        }
 
         let sanitizedData = {};
 

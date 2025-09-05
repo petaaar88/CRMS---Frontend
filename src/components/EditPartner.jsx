@@ -1,7 +1,9 @@
-﻿import {useContext, useEffect, useState} from "react";
+﻿import { useEffect, useState} from "react";
 import {useAuth} from "../contexts/AuthContext";
 import PartnerForm from "./PartnerForm.jsx";
 import FORM_TYPE from "../types/formType.js";
+import { checkTextLength } from "../utils/textUtils.js";
+
 
 const EditPartner = ({handleClose, open, data, showMessage, setRefresh}) => {
 
@@ -18,6 +20,32 @@ const EditPartner = ({handleClose, open, data, showMessage, setRefresh}) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if(!checkTextLength(newPartner.institutionName,2)){
+            showMessage("Institution Name must be at least 2 characters long!");
+            return;
+        }
+    
+        if(!checkTextLength(newPartner.address,2)){
+            showMessage("Address must be at least 2 characters long!");
+            return;
+        }
+    
+        if(!checkTextLength(newPartner.city,2)){
+            showMessage("City must be at least 2 characters long!");
+            return;
+        }
+    
+        if(!checkTextLength(newPartner.contractPersonFullName,2)){
+            showMessage("Contact Person Full Name must be at least 2 characters long!");
+            return;
+        }
+    
+        if(!checkTextLength(newPartner.contractPersonPosition,2)){
+            showMessage("Contact Person Position must be at least 2 characters long!");
+            return;
+        }
+        
 
         let sanitizedData = {};
 

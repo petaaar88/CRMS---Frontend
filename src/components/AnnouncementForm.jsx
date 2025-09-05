@@ -63,6 +63,8 @@ const AnnouncementForm = ({
               placeholder="Title"
               value={newAnnouncement?.title || ""}
               onChange={handleChange}
+              minlength="3"
+              maxlength="30"
               required
             />
           </div>
@@ -76,6 +78,8 @@ const AnnouncementForm = ({
               value={newAnnouncement?.description || ""}
               onChange={handleChange}
               rows={4}
+              minlength="3"
+              maxlength="700"
               required
             />
           </div>

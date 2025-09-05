@@ -3,6 +3,7 @@ import FORM_TYPE from "../types/formType";
 import PlanForm from "./PlanForm";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
+import { checkTextLength } from "../utils/textUtils";
 
 const CreatePlan = ({ setPlans, setFilteredPlans }) => {
   const [newPlan, setNewPlan] = useState({
@@ -32,7 +33,16 @@ const CreatePlan = ({ setPlans, setFilteredPlans }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // trim polja
+    if(!checkTextLength(newPlan.institutionName,2)){
+      showMessage("Institution Name must be at least 2 characters long!");
+      return;
+    }
+
+    if(!checkTextLength(newPlan.plannedActivities,2)){
+      showMessage("Planned Activities must be at least 2 characters long!");
+      return;
+    }
+
     const sanitizedData = {};
     Object.entries(newPlan).forEach(([key, value]) => {
       sanitizedData[key] = typeof value === "string" ? value.trim() : value;

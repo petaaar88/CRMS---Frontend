@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import PlanForm from "./PlanForm.jsx";
 import FORM_TYPE from "../types/formType.js";
+import { checkTextLength } from "../utils/textUtils.js";
 
 const EditPlan = ({ handleClose, open, data, showMessage, setPlans, setFilteredPlans }) => {
   const [newPlan, setNewPlan] = useState(data);
@@ -15,6 +16,16 @@ const EditPlan = ({ handleClose, open, data, showMessage, setPlans, setFilteredP
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if(!checkTextLength(newPlan.institutionName,2)){
+      showMessage("Institution Name must be at least 2 characters long!");
+      return;
+    }
+
+    if(!checkTextLength(newPlan.plannedActivities,2)){
+      showMessage("Planned Activities must be at least 2 characters long!");
+      return;
+    }
 
     const sanitizedData = {};
     Object.entries(newPlan).forEach(([key, value]) => {

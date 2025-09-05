@@ -60,6 +60,8 @@ const ReportForm = ({
                             placeholder="Institution Name"
                             value={newReport?.institutionName || ""}
                             onChange={handleChange}
+                            minLength={2}
+                            maxLength={35}
                             required
                         />
                         <input
@@ -69,6 +71,8 @@ const ReportForm = ({
                             placeholder="Sales Representative Name"
                             value={newReport?.firstAndLastNameOfSalesRepresentative || ""}
                             onChange={handleChange}
+                            minLength={2}
+                            maxLength={35}
                             required
                         />
                     </div>
@@ -107,6 +111,8 @@ const ReportForm = ({
                             placeholder="Report Text"
                             value={newReport?.reportText || ""}
                             onChange={handleChange}
+                            minLength={3}
+                            maxLength={1200}
                             required
                         />
                     </div>

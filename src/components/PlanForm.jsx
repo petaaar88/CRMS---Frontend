@@ -60,6 +60,8 @@ const PlanForm = ({
               placeholder="Institution Name"
               value={newPlan?.institutionName || ""}
               onChange={handleChange}
+              minLength={3}
+              maxLength={30}
               required
             />
             <input
@@ -69,6 +71,8 @@ const PlanForm = ({
               placeholder="Planned Visit Date"
               value={newPlan?.plannedVisitDate || ""}
               onChange={handleChange}
+              minLength="3"
+              maxLength="700"
               required
             />
           </div>

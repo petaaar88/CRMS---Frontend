@@ -54,6 +54,8 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             placeholder="Institution Name"
                             value={newPartner?.institutionName || ""}
                             onChange={handleChange}
+                            minLength={3}
+                            maxLength={35}
                             required
                         />
                         <select
@@ -82,6 +84,8 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             placeholder="Address"
                             value={newPartner?.address || ""}
                             onChange={handleChange}
+                            minLength={3}
+                            maxLength={35}
                             required
                         />
                         <input
@@ -91,6 +95,8 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             placeholder="City"
                             value={newPartner?.city || ""}
                             onChange={handleChange}
+                            minLength={3}
+                            maxLength={35}
                             required
                         />
                     </div>
@@ -103,6 +109,8 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             placeholder="Contact Person Full Name"
                             value={newPartner?.contractPersonFullName || ""}
                             onChange={handleChange}
+                            minLength={3}
+                            maxLength={35}
                             required
                         />
                         <input
@@ -112,6 +120,8 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             placeholder="Contact Person Position"
                             value={newPartner?.contractPersonPosition || ""}
                             onChange={handleChange}
+                            minLength={3}
+                            maxLength={35}
                             required
                         />
                     </div>
