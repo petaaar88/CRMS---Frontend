@@ -78,7 +78,7 @@ const PlanDetails = ({
                     className="bg-menu-button-light dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md"
                     onClick={openEdit}
                 >
-                    Update
+                    Edit
                 </button>
 
             </DialogContent>

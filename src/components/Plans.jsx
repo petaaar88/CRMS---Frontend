@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import TableContainer from "./TableContainer";
 import PlanDetails from "./PlanDetails";
 
-const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompletion }) => {
+const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompletion, desktopTableOffset = 310, mobileTableOffset = 440 }) => {
   const [plan, setPlan] = useState(null);
   const [open, setOpen] = useState(false);
   const [openDetails, setOpenDetails] = useState(false);
@@ -74,7 +74,7 @@ const Plans = ({ plans, loading, setPlans, setFilteredPlans, updatePlansCompleti
 
   return (
       <>
-        <TableContainer>
+        <TableContainer desktopOffset={desktopTableOffset} mobileoffset={mobileTableOffset}>
           <Table
               headers={headers}
               widths={widths}
