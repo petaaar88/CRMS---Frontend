@@ -18,10 +18,14 @@
   --color-deep-green: #2D3736;
 
   --color-button-dark-green: #244E39;
+  --color-dark-completed: #212928;
+  --color-dark-text-completed: #809e9a;
   --color-button-light-green: #3E9E2E;
 
   --color-menu-button-dark: #5CF8AA;
   --color-menu-button-light: #50BF30;
+
+  --color-light-background:#f0f0f0;
 }
 
 @layer utilities {

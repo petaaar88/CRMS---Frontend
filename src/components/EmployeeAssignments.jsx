@@ -5,6 +5,8 @@ import Table from "./Table";
 import {Snackbar} from "@mui/material";
 import AssignmentDetails from "./AssignmentDetails";
 import CreateAssignment from "./CreateAssignment";
+import MuiAlert from "@mui/material/Alert";
+
 
 const EmployeeAssignments = ({employeeId}) => {
     const [snackOpen, setSnackOpen] = useState(false);
@@ -12,6 +14,8 @@ const EmployeeAssignments = ({employeeId}) => {
     const [openDetails, setOpenDetails] = useState(false);
     const [refreshAssingments, setRefreshAssingments] = useState(false);
     const [snackMessage, setSnackMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(false);
+    
     const {fetchedData, fetchData, loading} = useFetch();
     const {accessToken} = useAuth();
 
@@ -19,9 +23,11 @@ const EmployeeAssignments = ({employeeId}) => {
         setSnackOpen(false);
     };
 
-    const showMessage = (message) => {
+    const showMessage = (message, isMessageSuccessful) => {
         setSnackMessage(message);
         setSnackOpen(true);
+        setSuccessMessage(isMessageSuccessful);
+
     };
 
     const showAssignment = (assignment) => {
@@ -65,7 +71,7 @@ const EmployeeAssignments = ({employeeId}) => {
             </div>
 
             <div
-                className="items-center space-y-3 mb-8 mt-8 text-white bg-gray dark:bg-darker-green px-3 py-4 rounded-xl"
+                className="items-center space-y-3 mb-8 mt-8 text-white bg-light-background dark:bg-darker-green px-3 py-4 rounded-xl"
                 style={{
                     width: "100%",
                     overflow: "auto",
@@ -96,7 +102,19 @@ const EmployeeAssignments = ({employeeId}) => {
                     autoHideDuration={4000}
                     onClose={handleCloseSnack}
                     message={snackMessage}
-                />
+                >
+                    <MuiAlert
+                        onClose={handleCloseSnack} 
+                        severity={successMessage ? "success" : "error"} 
+                        sx={{ 
+                        backgroundColor: successMessage ? "seagreen" :"firebrick", 
+                        color: "white",
+                        "& .MuiAlert-icon": { color: "white" } 
+                        }}
+                    >
+                        {snackMessage}
+                    </MuiAlert>
+                </Snackbar>
             </div>
         </>
 

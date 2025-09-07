@@ -13,7 +13,7 @@ const OptionFilter = ({ type, name, optionValue, setFilterValues }) => {
   return (
     <div>
       <select
-        className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 cursor-pointer  "
+        className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 cursor-pointer  "
         name={name}
         value={Object.values(optionValue)[0]}
         onChange={handleOnChange}

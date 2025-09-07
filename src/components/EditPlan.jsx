@@ -18,12 +18,12 @@ const EditPlan = ({ handleClose, open, data, showMessage, setPlans, setFilteredP
     e.preventDefault();
 
     if(!checkTextLength(newPlan.institutionName,2)){
-      showMessage("Institution Name must be at least 2 characters long!");
+      showMessage("Institution Name must be at least 2 characters long!",false);
       return;
     }
 
     if(!checkTextLength(newPlan.plannedActivities,2)){
-      showMessage("Planned Activities must be at least 2 characters long!");
+      showMessage("Planned Activities must be at least 2 characters long!",false);
       return;
     }
 
@@ -33,7 +33,7 @@ const EditPlan = ({ handleClose, open, data, showMessage, setPlans, setFilteredP
     });
 
     if (JSON.stringify(data) === JSON.stringify(sanitizedData)) {
-      showMessage("Data is same!");
+      showMessage("Data is same!",false);
       return;
     }
 
@@ -52,18 +52,22 @@ const EditPlan = ({ handleClose, open, data, showMessage, setPlans, setFilteredP
       );
 
       const responseData = await response.json();
-      showMessage(responseData.message);
+      let isMessageSuccessful = false;
+
       if (response.ok){
+        isMessageSuccessful = true;
         setPlans((prev) =>
           prev.map((plan) => (plan.id === responseData.plan.id ? responseData.plan : plan))
         );
         setFilteredPlans((prev) =>
           prev.map((plan) => (plan.id === responseData.plan.id ? responseData.plan : plan))
-        );
-      }
+      );
+
+      showMessage(responseData.message, isMessageSuccessful);
+  }
     } catch (error) {
       console.error(error);
-      showMessage(error.message || "An error occurred.");
+      showMessage(error.message || "An error occurred.", false);
     }
 
     setLoadingUpdate(false);
@@ -87,13 +91,13 @@ const EditPlan = ({ handleClose, open, data, showMessage, setPlans, setFilteredP
       if (response.ok){
         setPlans((prev) => prev.filter((plan) => plan.id !== data.id));
         setFilteredPlans((prev) => prev.filter((plan) => plan.id !== data.id));
-        showMessage("Plan successfully deleted!");
+        showMessage("Plan successfully deleted!", true);
       } else {
-        showMessage("Failed to delete plan.");
+        showMessage("Failed to delete plan.", false);
       }
     } catch (error) {
       console.error(error);
-      showMessage(error.message || "An error occurred.");
+      showMessage(error.message || "An error occurred.", false);
     }
 
     setLoadingDelete(false);

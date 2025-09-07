@@ -5,6 +5,7 @@ import EditEmployee from "../components/EditEmployee";
 import {Snackbar} from "@mui/material";
 import EmployeeDetails from "./EmployeeDetails";
 import TableContainer from "./TableContainer";
+import MuiAlert from "@mui/material/Alert";
 
 const Employees = ({employees, loading, setRefresh}) => {
     const [employeeDetails, setEmployeeDetails] = useState(null);
@@ -15,6 +16,8 @@ const Employees = ({employees, loading, setRefresh}) => {
 
 
     const [snackOpen, setSnackOpen] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(false);
+
     const [snackMessage, setSnackMessage] = useState(null);
 
 
@@ -29,9 +32,11 @@ const Employees = ({employees, loading, setRefresh}) => {
         setSnackOpen(false);
     };
 
-    const showMessage = (message) => {
+    const showMessage = (message, isMessageSuccessful) => {
         setSnackMessage(message);
         setSnackOpen(true);
+        setSuccessMessage(isMessageSuccessful);
+
     };
 
     const headers = [
@@ -88,7 +93,19 @@ const Employees = ({employees, loading, setRefresh}) => {
                 autoHideDuration={4000}
                 onClose={handleCloseSnack}
                 message={snackMessage}
-            />
+            >
+            <MuiAlert
+                onClose={handleCloseSnack} 
+                severity={successMessage ? "success" : "error"} 
+                sx={{ 
+                backgroundColor: successMessage ? "seagreen" :"firebrick", 
+                color: "white",
+                "& .MuiAlert-icon": { color: "white" } 
+                }}
+            >
+                {snackMessage}
+            </MuiAlert>
+            </Snackbar>
         </>
     );
 };

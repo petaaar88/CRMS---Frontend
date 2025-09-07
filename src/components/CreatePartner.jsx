@@ -4,6 +4,8 @@ import PartnerForm from "./PartnerForm";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 import { checkTextLength } from "../utils/textUtils";
+import MuiAlert from "@mui/material/Alert";
+
 
 const CreatePartner = ({setRefresh}) => {
   const [newPartner, setNewPartner] = useState({
@@ -16,13 +18,17 @@ const CreatePartner = ({setRefresh}) => {
     collaborationScore: null,
   });
   const [snackOpen, setSnackOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
+
   const [snackMessage, setSnackMessage] = useState(null);
   const [open, setOpen] = useState(false);
   const {accessToken} =  useAuth();
   const [loading, setLoading] = useState(false);
-  const showMessage = (message) => {
+
+  const showMessage = (message, isMessageSuccessful) => {
     setSnackMessage(message);
     setSnackOpen(true);
+    setSuccessMessage(isMessageSuccessful)
   };
 
    const handleClose = () => {
@@ -37,27 +43,27 @@ const CreatePartner = ({setRefresh}) => {
     e.preventDefault();
 
     if(!checkTextLength(newPartner.institutionName,2)){
-      showMessage("Institution Name must be at least 2 characters long!");
+      showMessage("Institution Name must be at least 2 characters long!", false);
       return;
     }
 
     if(!checkTextLength(newPartner.address,2)){
-      showMessage("Address must be at least 2 characters long!");
+      showMessage("Address must be at least 2 characters long!", false);
       return;
     }
 
     if(!checkTextLength(newPartner.city,2)){
-      showMessage("City must be at least 2 characters long!");
+      showMessage("City must be at least 2 characters long!", false);
       return;
     }
 
     if(!checkTextLength(newPartner.contractPersonFullName,2)){
-      showMessage("Contact Person Full Name must be at least 2 characters long!");
+      showMessage("Contact Person Full Name must be at least 2 characters long!", false);
       return;
     }
 
     if(!checkTextLength(newPartner.contractPersonPosition,2)){
-      showMessage("Contact Person Position must be at least 2 characters long!");
+      showMessage("Contact Person Position must be at least 2 characters long!", false);
       return;
     }
 
@@ -83,8 +89,10 @@ const CreatePartner = ({setRefresh}) => {
             }
         );
         const reponseData = await response.json();
-        showMessage(reponseData.message);
+        let isMessageSuccessful = false;
+
         if (response.ok){
+          isMessageSuccessful = true;
           setNewPartner({
             institutionName: null,
             institutionType: null,
@@ -96,9 +104,12 @@ const CreatePartner = ({setRefresh}) => {
           })
           setRefresh(prev => !prev);
         }
+
+        showMessage(reponseData.message, isMessageSuccessful);
+
     } catch (error) {
         console.error(error);
-        showMessage(error);
+        showMessage(error, false);
     }
 
     setLoading(false);
@@ -108,7 +119,7 @@ const CreatePartner = ({setRefresh}) => {
 
   return (
     <>
-    <button className="bg-menu-button-light dark:bg-button-dark-green shadow-md rounded-lg px-4 cursor-pointer font-bold text-lg" onClick={()=> setOpen(true)}>Add +</button>
+    <button className="text-white bg-menu-button-light  dark:bg-button-dark-green shadow-md rounded-lg px-4 cursor-pointer font-bold text-lg" onClick={()=> setOpen(true)}>Add +</button>
     <PartnerForm
         type={FORM_TYPE.CREATE}
         open={open}
@@ -124,7 +135,19 @@ const CreatePartner = ({setRefresh}) => {
         autoHideDuration={4000}
         onClose={handleCloseSnack}
         message={snackMessage}
-    />
+    >
+      <MuiAlert
+        onClose={handleCloseSnack} 
+        severity={successMessage ? "success" : "error"} 
+        sx={{ 
+          backgroundColor: successMessage ? "seagreen" :"firebrick", 
+          color: "white",
+          "& .MuiAlert-icon": { color: "white" } 
+        }}
+      >
+        {snackMessage}
+      </MuiAlert>
+      </Snackbar>
     </>
   );
 };

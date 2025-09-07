@@ -3,11 +3,15 @@ import Table from "../components/Table";
 import {Snackbar} from "@mui/material";
 import AnnouncementDetails from "./AnnouncementDetails";
 import TableContainer from "./TableContainer";
+import MuiAlert from "@mui/material/Alert";
+
 
 const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnnouncements}) => {
     const [announcement, setAnnouncement] = useState(null);
     const [open, setOpen] = useState(false);
     const [snackOpen, setSnackOpen] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(false);
+
     const [snackMessage, setSnackMessage] = useState(null);
 
     const handleClose = () => {
@@ -23,9 +27,11 @@ const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnn
         setSnackOpen(false);
     };
 
-    const showMessage = (message) => {
+    const showMessage = (message, isMessageSuccessful) => {
         setSnackMessage(message);
         setSnackOpen(true);
+        setSuccessMessage(isMessageSuccessful);
+
     };
 
     const headers = ["Title", "Description", "Created At", "Attachment"];
@@ -58,7 +64,19 @@ const Announcements = ({announcements, loading, setAnnouncements, setFilteredAnn
                 autoHideDuration={4000}
                 onClose={handleCloseSnack}
                 message={snackMessage}
-            />
+            >
+            <MuiAlert
+                onClose={handleCloseSnack} 
+                severity={successMessage ? "success" : "error"} 
+                sx={{ 
+                backgroundColor: successMessage ? "seagreen" :"firebrick", 
+                color: "white",
+                "& .MuiAlert-icon": { color: "white" } 
+                }}
+            >
+                {snackMessage}
+            </MuiAlert>
+            </Snackbar>
         </>
     );
 };

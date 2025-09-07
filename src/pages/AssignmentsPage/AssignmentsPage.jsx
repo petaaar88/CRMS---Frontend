@@ -62,7 +62,7 @@ const AssignmentsPage = () => {
     <div>
       <Heading title={"Assignments"} />
 
-      <div className="dark:bg-dark-green rounded-xl md:p-6">
+      <div className="bg-white dark:bg-dark-green rounded-xl md:p-6">
         <div className="flex flex-col lg:flex-row px-6 pt-6 md:p-0">
           <Search
             data={assignments}

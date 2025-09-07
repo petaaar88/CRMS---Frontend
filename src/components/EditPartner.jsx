@@ -22,27 +22,27 @@ const EditPartner = ({handleClose, open, data, showMessage, setRefresh}) => {
         e.preventDefault();
 
         if(!checkTextLength(newPartner.institutionName,2)){
-            showMessage("Institution Name must be at least 2 characters long!");
+            showMessage("Institution Name must be at least 2 characters long!", false);
             return;
         }
     
         if(!checkTextLength(newPartner.address,2)){
-            showMessage("Address must be at least 2 characters long!");
+            showMessage("Address must be at least 2 characters long!", false);
             return;
         }
     
         if(!checkTextLength(newPartner.city,2)){
-            showMessage("City must be at least 2 characters long!");
+            showMessage("City must be at least 2 characters long!", false);
             return;
         }
     
         if(!checkTextLength(newPartner.contractPersonFullName,2)){
-            showMessage("Contact Person Full Name must be at least 2 characters long!");
+            showMessage("Contact Person Full Name must be at least 2 characters long!", false);
             return;
         }
     
         if(!checkTextLength(newPartner.contractPersonPosition,2)){
-            showMessage("Contact Person Position must be at least 2 characters long!");
+            showMessage("Contact Person Position must be at least 2 characters long!", false);
             return;
         }
         
@@ -54,7 +54,7 @@ const EditPartner = ({handleClose, open, data, showMessage, setRefresh}) => {
         });
 
         if (JSON.stringify(data) === JSON.stringify(sanitizedData)) {
-            showMessage("Data is same!");
+            showMessage("Data is same!", false);
             return;
         }
 
@@ -72,12 +72,16 @@ const EditPartner = ({handleClose, open, data, showMessage, setRefresh}) => {
                 }
             );
             const reponseData = await response.json();
-            showMessage(reponseData.message);
-            if (response.ok)
+            let isMessageSuccessful = false;
+            
+            if (response.ok){
+                isMessageSuccessful = true;
                 setRefresh(prev => !prev);
+            }
+            showMessage(reponseData.message, isMessageSuccessful);
         } catch (error) {
             console.error(error);
-            showMessage(error);
+            showMessage(error, false);
         }
 
         setLoadingUpdate(false);
@@ -98,13 +102,17 @@ const EditPartner = ({handleClose, open, data, showMessage, setRefresh}) => {
                 }
             );
 
-            if (response.ok)
+            let isMessageSuccessful = false;
+
+            if (response.ok){
+                isMessageSuccessful = true;
                 setRefresh(prev => !prev);
-            showMessage("Partner successfully deleted!");
+            }
+            showMessage("Partner successfully deleted!", isMessageSuccessful);
 
         } catch (error) {
             console.error(error);
-            showMessage(error);
+            showMessage(error, false);
         }
 
         setLoadingDelete(false);

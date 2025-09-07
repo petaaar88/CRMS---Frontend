@@ -4,12 +4,16 @@ import {Snackbar} from "@mui/material";
 import {useAuth} from "../contexts/AuthContext";
 import AssignmentDetails from "./AssignmentDetails";
 import TableContainer from "./TableContainer";
+import MuiAlert from "@mui/material/Alert";
+
 
 const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
     const [snackOpen, setSnackOpen] = useState(false);
     const [openDetails, setOpenDetails] = useState(false);
     const [assignmentDetails, setAssignmentDetails] = useState(null);
     const [snackMessage, setSnackMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(false);
+
     const [loadingCheckUpdate, setLoadingCheckUpdate] = useState(false);
     const {accessToken} = useAuth();
 
@@ -22,9 +26,11 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
         setAssignmentDetails(assignmentDetails);
     }
 
-    const showMessage = (message) => {
+    const showMessage = (message,isMessageSuccessful) => {
         setSnackMessage(message);
         setSnackOpen(true);
+        setSuccessMessage(isMessageSuccessful);
+
     };
 
     const handleCheck = async (assignmentId, isCompleted) => {
@@ -42,14 +48,19 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
             );
 
             const responseData = await response.json();
-            showMessage(responseData.message);
-
-            if (response.ok)
+            
+            let isMessageSuccessful = false;
+            
+            
+            if (response.ok){
+                isMessageSuccessful = true;
                 updateAssignmentCompletion(assignmentId, isCompleted);
-
+            }
+            
+            showMessage(responseData.message, isMessageSuccessful);
         } catch (error) {
             console.error(error);
-            showMessage(error.message || "An error occurred.");
+            showMessage(error.message || "An error occurred.", false);
         } finally {
             setLoadingCheckUpdate(false);
         }
@@ -86,7 +97,19 @@ const Assignments = ({assignments, loading, updateAssignmentCompletion}) => {
                 autoHideDuration={4000}
                 onClose={handleCloseSnack}
                 message={snackMessage}
-            />
+            >
+                <MuiAlert
+                onClose={handleCloseSnack}
+                severity={successMessage ? "success" : "error"}
+                sx={{
+                    backgroundColor: successMessage ? "seagreen" : "firebrick",
+                    color: "white",
+                    "& .MuiAlert-icon": { color: "white" },
+                }}
+                >
+                {snackMessage}
+                </MuiAlert>
+            </Snackbar>
         </>
     );
 };

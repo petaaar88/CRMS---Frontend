@@ -49,7 +49,7 @@ const EmployeePartners = ({employeeId}) => {
 
     return (
         <div
-            className="items-center space-y-3 mb-8 mt-8 bg-gray dark:bg-darker-green text-white py-4 rounded-xl"
+            className="items-center space-y-3 mb-8 mt-8 bg-light-background dark:bg-darker-green text-white py-4 rounded-xl"
             style={{
                 width: "100%",
                 overflow: "auto",

@@ -9,7 +9,6 @@ const LoginForm = () => {
 
   const COLORS = {
     white: '#FFFFFF',
-    lightGray: '#F9F9F9',
     darkGray: '#5A5A5A',
     black: '#000000',
     gray: '#F6F6F6',

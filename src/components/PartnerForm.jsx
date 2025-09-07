@@ -48,7 +48,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col sm:flex-row gap-7 mb-8 sm:mb-5">
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md mb-1 sm:mb-0 outline-0 w-full sm:w-110 "
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md mb-1 sm:mb-0 outline-0 w-full sm:w-110 "
                             type="text"
                             name="institutionName"
                             placeholder="Institution Name"
@@ -59,7 +59,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             required
                         />
                         <select
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 cursor-pointer w-full sm:w-110 "
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 cursor-pointer w-full sm:w-110 "
                             name="institutionType"
                             value={newPartner?.institutionType || ""}
                             onChange={handleChange}
@@ -78,7 +78,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
 
                     <div className="flex flex-col sm:flex-row gap-7 mb-8 sm:mb-5">
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
                             type="text"
                             name="address"
                             placeholder="Address"
@@ -89,7 +89,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             required
                         />
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
                             type="text"
                             name="city"
                             placeholder="City"
@@ -103,7 +103,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
 
                     <div className="flex flex-col sm:flex-row gap-7 mb-8 sm:mb-5">
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
                             type="text"
                             name="contractPersonFullName"
                             placeholder="Contact Person Full Name"
@@ -114,7 +114,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                             required
                         />
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110 "
                             type="text"
                             name="contractPersonPosition"
                             placeholder="Contact Person Position"
@@ -128,7 +128,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
 
                     <div>
                         <select
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 cursor-pointer w-full sm:w-110 "
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 cursor-pointer w-full sm:w-110 "
                             name="collaborationScore"
                             value={String(newPartner?.collaborationScore || "")}
                             onChange={handleChange}
@@ -149,7 +149,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                         {type === FORM_TYPE.UPDATE ? 
                         <>
                             <button
-                                className="bg-menu-button-light order-2 sm:order-1 dark:bg-dark-green dark:active:bg-darker-green cursor-pointer text-red-600 dark:text-red-600 disabled:bg-gray-700 dark:disabled:bg-gray-700 py-2 px-7 rounded-md font-bold shadow-md"
+                                className="order-2 sm:order-1 bg-red-500 active:bg-red-600 dark:bg-dark-green dark:active:bg-darker-green cursor-pointer text-white dark:text-red-600 disabled:bg-red-900 disabled:text-gray-200 dark:disabled:text-red-800 dark:disabled:bg-gray-900 py-2 px-7 rounded-md font-bold shadow-md"
                                 onClick={handleDelete}
                                 type="button"
                                 disabled={loadingUpdate || loadingDelete}
@@ -171,7 +171,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                                 )}
                             </button>
                             <button
-                                className="bg-menu-button-light order-1 sm:order-2 mb-12 mt-5 sm:mb-0 sm:mt-0 dark:disabled:bg-gray-700 disabled:bg-gray-700 dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md"
+                                className="bg-menu-button-light order-1 sm:order-2 mb-12 mt-5 sm:mb-0 sm:mt-0 disabled:bg-green-800 dark:disabled:bg-deep-green  dark:bg-forest-green cursor-pointer text-white py-2 px-7 rounded-md font-bold shadow-md"
                                 autoFocus
                                 disabled={loadingUpdate || loadingDelete}
                             >
@@ -196,7 +196,7 @@ const PartnerForm = ({type, open, setNewPartner, newPartner, handleClose, handle
                         <button  
                             autoFocus
                             disabled={loadingCreate}
-                            className="bg-menu-button-light order-1 sm:order-2 mb-12 mt-5 sm:mb-0 sm:mt-0 dark:disabled:bg-gray-700 disabled:bg-gray-700 dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md"
+                            className=" bg-menu-button-light order-1 sm:order-2 mb-12 mt-5 sm:mb-0 sm:mt-0 dark:disabled:bg-gray-700 disabled:bg-gray-700 dark:bg-forest-green cursor-pointer text-white py-2 px-7 rounded-md font-bold shadow-md"
                         >
                            {loadingCreate ? (
                                     <div className="flex justify-center items-center">

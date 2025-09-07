@@ -52,7 +52,7 @@ const EmployeeForm = ({
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-7">
                     <input
-                        className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
+                        className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
                         type="text"
                         name="umcn"
                         placeholder="UMCN"
@@ -65,7 +65,7 @@ const EmployeeForm = ({
 
                     <div className="flex flex-col sm:flex-row gap-7">
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-1/2"
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-1/2"
                             type="text"
                             name="firstName"
                             placeholder="First Name"
@@ -76,7 +76,7 @@ const EmployeeForm = ({
                             required
                         />
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-1/2"
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-1/2"
                             type="text"
                             name="lastName"
                             placeholder="Last Name"
@@ -89,7 +89,7 @@ const EmployeeForm = ({
                     </div>
 
                     <input
-                        className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
+                        className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
                         type="text"
                         name="username"
                         placeholder="Username"
@@ -101,7 +101,7 @@ const EmployeeForm = ({
                     />
 
                     <input
-                        className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
+                        className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
                         type="text"
                         name="password"
                         placeholder="Password"
@@ -113,7 +113,7 @@ const EmployeeForm = ({
                     />
 
                     <input
-                        className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
+                        className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
                         type="text"
                         name="phoneNumber"
                         placeholder="Phone Number"
@@ -128,7 +128,7 @@ const EmployeeForm = ({
                         {type === FORM_TYPE.UPDATE ? (
 
                             <button
-                                className="bg-menu-button-light order-1 sm:order-2 dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md"
+                                className="bg-menu-button-light order-1 sm:order-2 mb-12 mt-5 sm:mb-0 sm:mt-0 disabled:bg-green-800 dark:disabled:bg-deep-green  dark:bg-forest-green cursor-pointer text-white py-2 px-7 rounded-md font-bold shadow-md"
                                 autoFocus
                                 disabled={loadingUpdate}
                             >
@@ -151,7 +151,7 @@ const EmployeeForm = ({
                             <button
                                 autoFocus
                                 disabled={loadingCreate}
-                                className="bg-menu-button-light dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md"
+                                className="bg-menu-button-light dark:bg-forest-green cursor-pointer text-white py-2 px-7 rounded-md font-bold shadow-md"
                             >
                                 {loadingCreate ? (
                                     <CircularProgress

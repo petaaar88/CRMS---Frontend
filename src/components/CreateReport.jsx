@@ -4,6 +4,8 @@ import ReportForm from "./ReportForm";
 import { Snackbar } from "@mui/material";
 import { useAuth } from "../contexts/AuthContext";
 import { checkTextLength } from "../utils/textUtils";
+import MuiAlert from "@mui/material/Alert";
+
 
 const CreateReport = ({ setRefresh }) => {
   const [newReport, setNewReport] = useState({
@@ -16,13 +18,17 @@ const CreateReport = ({ setRefresh }) => {
 
   const [snackOpen, setSnackOpen] = useState(false);
   const [snackMessage, setSnackMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(false);
+
   const [open, setOpen] = useState(false);
   const { accessToken } = useAuth();
   const [loading, setLoading] = useState(false);
 
-  const showMessage = (message) => {
+  const showMessage = (message, isMessageSuccessful) => {
     setSnackMessage(message);
     setSnackOpen(true);
+    setSuccessMessage(isMessageSuccessful);
+
   };
 
   const handleClose = () => {
@@ -37,17 +43,17 @@ const CreateReport = ({ setRefresh }) => {
     e.preventDefault();
 
      if(!checkTextLength(newReport.institutionName,2)){
-          showMessage("Institution Name must be at least 2 characters long!");
+          showMessage("Institution Name must be at least 2 characters long!", false);
           return;
       }
 
       if(!checkTextLength(newReport.firstAndLastNameOfSalesRepresentative,2)){
-          showMessage("Sales representative name must be at least 2 characters long!");
+          showMessage("Sales representative name must be at least 2 characters long!", false);
           return;
       }
 
       if(!checkTextLength(newReport.reportText,3)){
-          showMessage("Report must be at least 3 characters long!");
+          showMessage("Report must be at least 3 characters long!", false);
           return;
       }
 
@@ -70,10 +76,11 @@ const CreateReport = ({ setRefresh }) => {
         }
       );
       const responseData = await response.json();
-      console.log(responseData);
-      
-      showMessage(responseData.message);
+
+      let isMessageSuccessful = false;
+
       if (response.ok) {
+        isMessageSuccessful = true
         setNewReport({
           institutionName: null,
           firstAndLastNameOfSalesRepresentative: null,
@@ -83,9 +90,10 @@ const CreateReport = ({ setRefresh }) => {
         });
         setRefresh((prev) => !prev);
       }
+      showMessage(responseData.message, isMessageSuccessful);
     } catch (error) {
       console.error(error);
-      showMessage(error);
+      showMessage(error, false);
     }
 
     setLoading(false);
@@ -95,7 +103,7 @@ const CreateReport = ({ setRefresh }) => {
   return (
     <>
       <button
-        className="bg-menu-button-light dark:bg-button-dark-green shadow-md rounded-lg px-4 cursor-pointer font-bold text-lg"
+        className="text-white   bg-menu-button-light dark:bg-button-dark-green shadow-md rounded-lg px-4 cursor-pointer font-bold text-lg"
         onClick={() => setOpen(true)}
       >
         Add +
@@ -115,7 +123,19 @@ const CreateReport = ({ setRefresh }) => {
         autoHideDuration={4000}
         onClose={handleCloseSnack}
         message={snackMessage}
-      />
+      >
+          <MuiAlert
+            onClose={handleCloseSnack} 
+            severity={successMessage ? "success" : "error"} 
+            sx={{ 
+              backgroundColor: successMessage ? "seagreen" :"firebrick", 
+              color: "white",
+              "& .MuiAlert-icon": { color: "white" } 
+            }}
+          >
+            {snackMessage}
+          </MuiAlert>
+        </Snackbar>
     </>
   );
 };

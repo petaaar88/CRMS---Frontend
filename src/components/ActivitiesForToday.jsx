@@ -72,7 +72,7 @@ const ActivitiesForToday = () => {
   }, []);
 
   return (
-    <div className="dark:bg-deep-green rounded-xl pt-8 px-0 md:px-8 mt-7 mx-0 md:mx-0 shadow-lg">
+    <div className="bg-white dark:bg-deep-green rounded-xl pt-8 px-0 md:px-8 mt-7 mx-0 md:mx-0 shadow-lg">
              {loadingPlans ? 
        <div className="h-48 flex justify-center items-center">
             <CircularProgress

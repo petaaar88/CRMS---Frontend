@@ -19,17 +19,17 @@ const EditReport = ({ handleClose, open, data, showMessage, setRefresh }) => {
         e.preventDefault();
 
         if(!checkTextLength(newReport.institutionName,2)){
-            showMessage("Institution Name must be at least 2 characters long!");
+            showMessage("Institution Name must be at least 2 characters long!", false);
             return;
         }
 
         if(!checkTextLength(newReport.firstAndLastNameOfSalesRepresentative,2)){
-            showMessage("Sales representative name must be at least 2 characters long!");
+            showMessage("Sales representative name must be at least 2 characters long!", false);
             return;
         }
 
         if(!checkTextLength(newReport.reportText,3)){
-            showMessage("Report must be at least 3 characters long!");
+            showMessage("Report must be at least 3 characters long!", false);
             return;
         }
         
@@ -41,7 +41,7 @@ const EditReport = ({ handleClose, open, data, showMessage, setRefresh }) => {
         });
 
         if (JSON.stringify(data) === JSON.stringify(sanitizedData)) {
-            showMessage("Data is same!");
+            showMessage("Data is same!", false);
             return;
         }
 
@@ -59,12 +59,18 @@ const EditReport = ({ handleClose, open, data, showMessage, setRefresh }) => {
                 }
             );
             const responseData = await response.json();
-            showMessage(responseData.message);
-            if (response.ok)
+
+            let isMessageSuccessful = false;
+
+            if (response.ok){
+                isMessageSuccessful = true;
                 setRefresh(prev => !prev);
+            }
+
+            showMessage(responseData.message,isMessageSuccessful);
         } catch (error) {
             console.error(error);
-            showMessage(error);
+            showMessage(error, false);
         }
 
         setLoadingUpdate(false);
@@ -84,14 +90,16 @@ const EditReport = ({ handleClose, open, data, showMessage, setRefresh }) => {
                     }
                 }
             );
-
-            if (response.ok)
+           let isMessageSuccessful = false;
+            if (response.ok){
+                isMessageSuccessful = true;
                 setRefresh(prev => !prev);
-            showMessage("Report successfully deleted!");
+            }
+            showMessage("Report successfully deleted!", isMessageSuccessful);
 
         } catch (error) {
             console.error(error);
-            showMessage(error);
+            showMessage(error, false);
         }
 
         setLoadingDelete(false);

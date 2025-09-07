@@ -3,6 +3,8 @@ import EmployeeForm from "./EmployeeForm";
 import {Snackbar} from "@mui/material";
 import {useAuth} from "../contexts/AuthContext";
 import { checkTextLength, isNumeric, isPhoneNumber } from "../utils/textUtils";
+import MuiAlert from "@mui/material/Alert";
+
 
 const CreateEmployee = ({setRefresh}) => {
     const [newEmployee, setNewEmployee] = useState({
@@ -16,13 +18,16 @@ const CreateEmployee = ({setRefresh}) => {
 
     const [snackOpen, setSnackOpen] = useState(false);
     const [snackMessage, setSnackMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(false);
+
     const [open, setOpen] = useState(false);
     const {accessToken} = useAuth();
     const [loading, setLoading] = useState(false);
 
-    const showMessage = (message) => {
+    const showMessage = (message,isMessageSuccessful) => {
         setSnackMessage(message);
         setSnackOpen(true);
+        setSuccessMessage(isMessageSuccessful);
     };
 
     const handleClose = () => {
@@ -37,32 +42,32 @@ const CreateEmployee = ({setRefresh}) => {
         e.preventDefault();
 
         if(!checkTextLength(newEmployee.firstName,2)){
-            showMessage("First Name must be at least 2 characters long!");
+            showMessage("First Name must be at least 2 characters long!", false);
             return;
         }
 
         if(!checkTextLength(newEmployee.lastName,2)){
-            showMessage("Last Name must be at least 2 characters long!");
+            showMessage("Last Name must be at least 2 characters long!", false);
             return;
         }
 
         if(!isNumeric(newEmployee.umcn)){
-            showMessage("UMCN must consist of digits only!");
+            showMessage("UMCN must consist of digits only!", false);
             return;
         }
 
         if(!checkTextLength(newEmployee.username, 4)){
-            showMessage("Username must be at least 4 characters long!");
+            showMessage("Username must be at least 4 characters long!", false);
             return;
         }
 
         if(!checkTextLength(newEmployee.password, 5)){
-            showMessage("Password must be at least 4 characters long!");
+            showMessage("Password must be at least 4 characters long!", false);
             return;
         }
 
          if(!isPhoneNumber(newEmployee.phoneNumber)){
-            showMessage("Invalid phone number format");
+            showMessage("Invalid phone number format", false);
             return;
         }
 
@@ -86,9 +91,12 @@ const CreateEmployee = ({setRefresh}) => {
                 }
             );
             const responseData = await response.json();
-            showMessage(responseData.message);
 
+            let isMessageSuccessful = false;
+
+            
             if (response.ok) {
+                isMessageSuccessful = true;
                 setNewEmployee({
                     umcn: null,
                     firstName: null,
@@ -99,9 +107,11 @@ const CreateEmployee = ({setRefresh}) => {
                 });
                 setRefresh((prev) => !prev);
             }
+
+            showMessage(responseData.message, isMessageSuccessful);
         } catch (error) {
             console.error(error);
-            showMessage(error.message || "Something went wrong");
+            showMessage(error.message || "Something went wrong", false);
         }
 
         setLoading(false);
@@ -111,7 +121,7 @@ const CreateEmployee = ({setRefresh}) => {
     return (
         <>
             <button
-                className="bg-menu-button-light dark:bg-button-dark-green shadow-md rounded-lg px-4 py-2 cursor-pointer font-bold text-lg w-full"
+                className="text-white bg-menu-button-light dark:bg-button-dark-green shadow-md rounded-lg px-4 py-2 cursor-pointer font-bold text-lg w-full"
                 onClick={() => setOpen(true)}
             >
                 Add +
@@ -132,7 +142,19 @@ const CreateEmployee = ({setRefresh}) => {
                 autoHideDuration={4000}
                 onClose={handleCloseSnack}
                 message={snackMessage}
-            />
+            >
+            <MuiAlert
+                onClose={handleCloseSnack} 
+                severity={successMessage ? "success" : "error"} 
+                sx={{ 
+                backgroundColor: successMessage ? "seagreen" :"firebrick", 
+                color: "white",
+                "& .MuiAlert-icon": { color: "white" } 
+                }}
+            >
+                {snackMessage}
+            </MuiAlert>
+            </Snackbar>
         </>
     );
 };

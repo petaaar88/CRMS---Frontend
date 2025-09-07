@@ -74,8 +74,8 @@ const EmployeeDetails = ({open, handleClose, data, setEditEmployee, setOpenEdit}
                         </h3>
                         <div className="mb-2 md:mb-0">
                             <button
-                                className="bg-menu-button-light dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md"
-                                onClick={async () => showEdit(data)}>Update
+                                className="bg-menu-button-light dark:bg-forest-green cursor-pointer text-white py-2 px-7  text-md rounded-md font-bold shadow-md"
+                                onClick={async () => showEdit(data)}>Edit
                             </button>
                         </div>
 

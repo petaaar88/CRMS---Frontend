@@ -46,7 +46,7 @@ const  FileUploader = ({setNewData}) => {
         onDragOver={handleDragOver}
         onDrop={handleDrop}
         data-dragging={isDragging || undefined}
-        className="shadow-lg bg-dark-gray border-input hover:bg-gray-600 data-[dragging=true]:bg-gray-600 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 flex min-h-40 flex-col items-center justify-center rounded-lg  p-4 transition-colors has-disabled:pointer-events-none has-disabled:opacity-50 has-[input:focus]:ring-[3px] cursor-pointer"
+        className="shadow-lg bg-gray-200 dark:bg-dark-gray border-input data-[dragging=true]:bg-gray-600 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 flex min-h-40 flex-col items-center justify-center rounded-lg  p-4 transition-colors has-disabled:pointer-events-none has-disabled:opacity-50 has-[input:focus]:ring-[3px] cursor-pointer"
       >
         <input
           {...getInputProps()}
@@ -58,7 +58,7 @@ const  FileUploader = ({setNewData}) => {
 
         <div className="flex flex-col items-center justify-center text-center">
           <div
-            className=" mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border border-white"
+            className=" mb-2 flex size-11 shrink-0 items-center justify-center rounded-full border dark:border-white"
             aria-hidden="true"
           >
             <UploadIcon color={theme === "dark" ? "white": "black"} className="size-4 opacity-60" />

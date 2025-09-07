@@ -5,12 +5,15 @@ import EditPartner from "../components/EditPartner";
 import {Snackbar} from "@mui/material";
 import PartnerDetails from "./PartnerDetails";
 import TableContainer from "./TableContainer";
+import MuiAlert from "@mui/material/Alert";
 
 const Partners = ({partners, loading, setRefresh}) => {
     const [partner, setPartner] = useState(null);
     const [openEdit, setOpenEdit] = useState(false);
     const [openDetails, setOpenDetails] = useState(false);
     const [snackOpen, setSnackOpen] = useState(false);
+    const [successMessage, setSuccessMessage] = useState(false);
+
     const [snackMessage, setSnackMessage] = useState(null);
 
     const showPartner = (partner) => {
@@ -22,9 +25,10 @@ const Partners = ({partners, loading, setRefresh}) => {
         setSnackOpen(false);
     };
 
-    const showMessage = (message) => {
+    const showMessage = (message, isMessageSuccessful) => {
         setSnackMessage(message);
         setSnackOpen(true);
+        setSuccessMessage(isMessageSuccessful);
     };
 
     const headers = [
@@ -81,7 +85,19 @@ const Partners = ({partners, loading, setRefresh}) => {
                 autoHideDuration={4000}
                 onClose={handleCloseSnack}
                 message={snackMessage}
-            />
+            >
+                <MuiAlert
+                    onClose={handleCloseSnack} 
+                    severity={successMessage ? "success" : "error"} 
+                    sx={{ 
+                    backgroundColor: successMessage ? "seagreen" :"firebrick", 
+                    color: "white",
+                    "& .MuiAlert-icon": { color: "white" } 
+                    }}
+                >
+                    {snackMessage}
+                </MuiAlert>
+            </Snackbar>
         </>
     );
 };

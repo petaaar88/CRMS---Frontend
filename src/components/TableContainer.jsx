@@ -4,7 +4,7 @@ const TableContainer = ({children, desktopOffset="310", mobileoffset="440"}) => 
   const {isMdBreakpoint} = useBreakpoints();
   return (
     <div
-        className="items-center space-y-3  md:mb-4 mt-8 bg-gray dark:bg-darker-green px-3 py-4 rounded-xl"
+        className="items-center space-y-3  md:mb-4 mt-8 bg-light-background dark:bg-darker-green px-3 py-4 rounded-xl"
         style={{
           width: "100%",
           overflow: "auto",

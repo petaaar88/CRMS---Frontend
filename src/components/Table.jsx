@@ -51,12 +51,12 @@ const Table = ({
     return (
         <div className="flex flex-col gap-3 px-3" style={{width: "100%", minWidth: minWidth}}>
             <div
-                className="sticky top-0 grid gap-4 z-10 items-center justify-around bg-menu-button-light dark:bg-button-dark-green shadow rounded-lg p-4 font-bold"
+                className="sticky top-0 grid gap-4 z-10 items-center justify-around bg-menu-button-light dark:bg-button-dark-green text-white shadow rounded-lg p-4 font-bold"
                 style={{gridTemplateColumns: widths.join(" ")}}>
                 {headers.map((col, idx) => (
                     <div
                         key={idx}
-                        className="cursor-pointer select-none hover:text-gray-700 dark:hover:text-gray-300 text-center"
+                        className="cursor-pointer select-none hover:text-gray-200 dark:hover:text-gray-300 text-center"
                         onClick={() => columns[idx] && requestSort(columns[idx])}
                     >
                         {col}{" "}
@@ -86,7 +86,7 @@ const Table = ({
                 sortedData.map((row) => (
                     <div
                         key={row.id}
-                        className={"grid gap-4 items-center justify-around shadow rounded-lg p-4 cursor-pointer transition-colors bg-gray dark:bg-deep-green dark:hover:text-gray-400 dark:active:bg-dark-green text-center " + (row.isCompleted ? 'text-gray-300 dark:text-gray-500 bg-gray-600 dark:bg-gray-800' : "")}
+                        className={"grid gap-4 items-center justify-around shadow rounded-lg p-4 cursor-pointer transition-colors text-black hover:text-gray-500 dark:text-white bg-white dark:bg-deep-green dark:hover:text-gray-400 dark:active:bg-dark-green text-center " + (row.isCompleted ? '!text-gray-400 dark:!text-dark-text-completed !bg-gray-100 dark:!bg-dark-completed' : "")}
                         style={{gridTemplateColumns: widths.join(" ")}}
                         onClick={() => showData(row)}
                     >

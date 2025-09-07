@@ -268,12 +268,13 @@ const dateFilterData = (filterValue, data) => {
             background:
               theme === "dark"
                 ? "var(--color-darker-green)"
-                : "var(--color-light-gray)",
+                : "var(--color-light-background)",
             borderRadius: "8px",
+            boxShadow:"none"
           }}
         >
           <InputBase
-            sx={{ ml: 1, flex: 1, color: theme === "dark" ? "white" : "gray" }}
+            sx={{ ml: 1, flex: 1, color: theme === "dark" ? "white" : "black" }}
             placeholder="Search..."
             inputProps={{ "aria-label": "search" }}
             onChange={(e) => setValue(e.target.value)}
@@ -305,7 +306,7 @@ const dateFilterData = (filterValue, data) => {
           slotProps={{
             paper: {
               className:
-                " !bg-light-gray dark:!bg-deep-green dark:!text-white rounded-lg shadow-lg",
+                " !bg-light-gray dark:!bg-deep-green dark:!text-white rounded-lg",
             },
           }}
         >

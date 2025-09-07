@@ -49,7 +49,7 @@ const AssignmentForm = ({
                     {/* description */}
                     <div className="flex flex-col gap-7 mb-8 sm:mb-5">
             <textarea
-                className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
+                className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
                 name="description"
                 placeholder="Description"
                 value={newAssignment?.description || ""}
@@ -64,7 +64,7 @@ const AssignmentForm = ({
                     {/* deadline */}
                     <div className="flex flex-col gap-7 mb-8 sm:mb-5">
                         <input
-                            className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110"
+                            className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-110"
                             type="date"
                             name="deadline"
                             placeholder="Deadline"
@@ -79,7 +79,7 @@ const AssignmentForm = ({
                         <button
                             autoFocus
                             disabled={loadingCreate}
-                            className="bg-menu-button-light dark:disabled:bg-gray-700 disabled:bg-gray-700 dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md"
+                            className="bg-menu-button-light dark:disabled:bg-gray-700 disabled:bg-gray-700 dark:bg-forest-green cursor-pointer text-white py-2 px-7 rounded-md font-bold shadow-md"
                         >
                             {loadingCreate ? (
                                 <div className="flex justify-center items-center">

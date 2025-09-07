@@ -57,14 +57,14 @@ const AnnouncementForm = ({
          
           <div className="flex flex-col gap-7 mb-8 sm:mb-5">
             <input
-              className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
+              className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full"
               type="text"
               name="title"
               placeholder="Title"
               value={newAnnouncement?.title || ""}
               onChange={handleChange}
-              minlength="3"
-              maxlength="30"
+              minLength="3"
+              maxLength="40"
               required
             />
           </div>
@@ -72,14 +72,14 @@ const AnnouncementForm = ({
          
           <div className="flex flex-col gap-7 mb-8 sm:mb-5">
             <textarea
-              className="bg-dark-gray text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-200"
+              className="bg-gray-200 dark:bg-dark-gray dark:text-white p-5 sm:p-2 shadow-lg rounded-md outline-0 w-full sm:w-200"
               name="description"
               placeholder="Description"
               value={newAnnouncement?.description || ""}
               onChange={handleChange}
               rows={4}
-              minlength="3"
-              maxlength="700"
+              minLength="3"
+              maxLength="700"
               required
             />
           </div>
@@ -94,7 +94,7 @@ const AnnouncementForm = ({
             <button
               autoFocus
               disabled={loadingCreate}
-              className="bg-menu-button-light dark:bg-forest-green cursor-pointer text-black dark:text-white py-2 px-7 rounded-md font-bold shadow-md disabled:bg-gray-700 dark:disabled:bg-gray-700"
+              className="bg-menu-button-light dark:bg-forest-green cursor-pointer text-white py-2 px-7 rounded-md font-bold shadow-md disabled:bg-gray-700 dark:disabled:bg-gray-700"
             >
               {loadingCreate ? (
                 <div className="flex justify-center items-center">

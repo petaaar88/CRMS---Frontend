@@ -1,4 +1,4 @@
-﻿import {useEffect, useState, useContext} from "react";
+﻿import { useState, useContext} from "react";
 import {useAuth} from "../contexts/AuthContext.jsx";
 import CloseIcon from "@mui/icons-material/Close";
 import {ThemeContext} from "../contexts/ThemeContext";
@@ -34,11 +34,11 @@ const AssignmentDetails = ({
 
             if (response.ok) {
                 setRefresh((prev) => !prev);
-                showMessage("Assignment successfully deleted!");
+                showMessage("Assignment successfully deleted!", true);
             }
         } catch (error) {
             console.error(error);
-            showMessage(error.message || "An error occurred.");
+            showMessage(error.message || "An error occurred.", false);
         }
 
         setLoadingDelete(false);
@@ -92,7 +92,7 @@ const AssignmentDetails = ({
                 {
                     canEdit &&
                     <button
-                    className="bg-menu-button-light order-2 sm:order-1 dark:bg-dark-green dark:active:bg-darker-green cursor-pointer text-red-600 dark:text-red-600 disabled:bg-gray-700 dark:disabled:bg-gray-700 py-2 px-7 rounded-md font-bold shadow-md"
+                    className="order-2 sm:order-1 bg-red-500 active:bg-red-600 dark:bg-dark-green dark:active:bg-darker-green cursor-pointer text-white dark:text-red-600 disabled:bg-red-900 disabled:text-gray-200 dark:disabled:text-red-800 dark:disabled:bg-gray-900 py-2 px-7 rounded-md font-bold shadow-md"
                     disabled={loadingDelete} onClick={async () => handleDelete()}>{loadingDelete ? (
                         <div className="flex justify-center items-center">
                         <CircularProgress

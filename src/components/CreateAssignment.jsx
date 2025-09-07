@@ -3,6 +3,8 @@ import AssignmentForm from "./AssignmentForm";
 import {Snackbar} from "@mui/material";
 import {useAuth} from "../contexts/AuthContext";
 import { checkTextLength } from "../utils/textUtils";
+import MuiAlert from "@mui/material/Alert";
+
 
 const CreateAssignment = ({employeeId, setRefresh}) => {
     const [newAssignment, setNewAssignment] = useState({
@@ -11,13 +13,16 @@ const CreateAssignment = ({employeeId, setRefresh}) => {
     });
     const [snackOpen, setSnackOpen] = useState(false);
     const [snackMessage, setSnackMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(false);
+
     const [open, setOpen] = useState(false);
     const {accessToken} = useAuth();
     const [loading, setLoading] = useState(false);
 
-    const showMessage = (message) => {
+    const showMessage = (message, isMessageSuccessful) => {
         setSnackMessage(message);
         setSnackOpen(true);
+        setSuccessMessage(isMessageSuccessful);
     };
 
     const handleClose = () => {
@@ -32,10 +37,10 @@ const CreateAssignment = ({employeeId, setRefresh}) => {
         e.preventDefault();
 
         if(!checkTextLength(newAssignment.description,5)){
-            showMessage("Description must be at least 2 characters long!");
+            showMessage("Description must be at least 2 characters long!", false);
             return;
         }
-
+        
         const sanitizedData = {
             description: newAssignment.description.trim(),
             deadline: newAssignment.deadline,
@@ -56,18 +61,20 @@ const CreateAssignment = ({employeeId, setRefresh}) => {
             );
 
             const responseData = await response.json();
-            showMessage(responseData.message);
+            let isMessageSuccessful = false;
 
             if (response.ok) {
+                isMessageSuccessful = true;
                 setNewAssignment({
                     description: "",
                     deadline: "",
                 });
                 setRefresh((prev) => !prev);
             }
+            showMessage(responseData.message, isMessageSuccessful);
         } catch (error) {
             console.error(error);
-            showMessage(error.message || "An error occurred.");
+            showMessage(error.message || "An error occurred.", false);
         }
 
         setLoading(false);
@@ -98,7 +105,19 @@ const CreateAssignment = ({employeeId, setRefresh}) => {
                 autoHideDuration={4000}
                 onClose={handleCloseSnack}
                 message={snackMessage}
-            />
+            >
+                <MuiAlert
+                    onClose={handleCloseSnack} 
+                    severity={successMessage ? "success" : "error"} 
+                    sx={{ 
+                    backgroundColor: successMessage ? "seagreen" :"firebrick", 
+                    color: "white",
+                    "& .MuiAlert-icon": { color: "white" } 
+                    }}
+                >
+                    {snackMessage}
+                </MuiAlert>
+            </Snackbar>
         </>
     );
 };

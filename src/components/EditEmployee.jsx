@@ -18,32 +18,32 @@ const EditEmployee = ({handleClose, open, data, showMessage, setRefresh}) => {
         e.preventDefault();
 
         if(!checkTextLength(newEmployee.firstName,2)){
-            showMessage("First Name must be at least 2 characters long!");
+            showMessage("First Name must be at least 2 characters long!", false);
             return;
         }
 
         if(!checkTextLength(newEmployee.lastName,2)){
-            showMessage("Last Name must be at least 2 characters long!");
+            showMessage("Last Name must be at least 2 characters long!", false);
             return;
         }
 
         if(!isNumeric(newEmployee.umcn)){
-            showMessage("UMCN must consist of digits only!");
+            showMessage("UMCN must consist of digits only!", false);
             return;
         }
 
         if(!checkTextLength(newEmployee.username, 4)){
-            showMessage("Username must be at least 4 characters long!");
+            showMessage("Username must be at least 4 characters long!", false);
             return;
         }
 
         if(!checkTextLength(newEmployee.password, 5)){
-            showMessage("Password must be at least 4 characters long!");
+            showMessage("Password must be at least 4 characters long!", false);
             return;
         }
 
          if(!isPhoneNumber(newEmployee.phoneNumber)){
-            showMessage("Invalid phone number format");
+            showMessage("Invalid phone number format", false);
             return;
         }
 
@@ -55,7 +55,7 @@ const EditEmployee = ({handleClose, open, data, showMessage, setRefresh}) => {
 
         // Ako nema promena, ne šaljemo PATCH
         if (JSON.stringify(data) === JSON.stringify(sanitizedData)) {
-            showMessage("Data is same!");
+            showMessage("Data is same!", false);
             return;
         }
 
@@ -73,12 +73,16 @@ const EditEmployee = ({handleClose, open, data, showMessage, setRefresh}) => {
                 }
             );
             const responseData = await response.json();
-            console.log(responseData.message)
-            showMessage(responseData.message);
-            if (response.ok) setRefresh((prev) => !prev);
+            let isMessageSuccessful = false;
+
+            if (response.ok){ 
+                isMessageSuccessful = true;
+                setRefresh((prev) => !prev);
+            }
+            showMessage(responseData.message, isMessageSuccessful);
         } catch (error) {
             console.error(error);
-            showMessage(error.message || "Something went wrong");
+            showMessage(error.message || "Something went wrong", false);
         }
 
         setLoadingUpdate(false);
@@ -100,10 +104,10 @@ const EditEmployee = ({handleClose, open, data, showMessage, setRefresh}) => {
             );
 
             if (response.ok) setRefresh((prev) => !prev);
-            showMessage("Employee successfully deleted!");
+            showMessage("Employee successfully deleted!", true);
         } catch (error) {
             console.error(error);
-            showMessage(error.message || "Something went wrong");
+            showMessage(error.message || "Something went wrong", false);
         }
 
         setLoadingDelete(false);

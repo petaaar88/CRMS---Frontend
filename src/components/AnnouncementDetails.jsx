@@ -73,14 +73,14 @@ const AnnouncementDetails = ({
       if (response.ok) {
         setAnnouncements((prev) => prev.filter(a => a.id !== data.id));
         setFilteredAnnouncements((prev) => prev.filter(a => a.id !== data.id));
-        showMessage("Announcement successfully deleted!");
+        showMessage("Announcement successfully deleted!", true);
       }
       else
         throw Error();
 
     } catch (error) {
       console.error(error);
-      showMessage(error.message || "An error occurred.");
+      showMessage(error.message || "An error occurred.", false);
     }
 
     setLoading(false);
@@ -124,28 +124,31 @@ const AnnouncementDetails = ({
                   >
                     {data.fileName}
                   </button>
-                  <button
-                      className="bg-menu-button-light order-2 sm:order-1 mt-4 dark:bg-dark-green dark:active:bg-darker-green cursor-pointer text-red-600 dark:text-red-600 disabled:bg-gray-700 dark:disabled:bg-gray-700 py-2 px-7 rounded-md font-bold shadow-md"
-                      onClick={handleDelete}
-                      type="button"
-                      disabled={loading}
-                  >
-                    {loading ? (
-                        <div className="flex justify-center items-center">
-                          <CircularProgress
-                              size={20}
-                              sx={{
-                                color:
-                                    theme === "dark"
-                                        ? "var(--color-menu-button-dark)"
-                                        : "var(--color-button-light-green)",
-                              }}
-                          />
-                        </div>
-                    ) : (
-                        "Delete"
-                    )}
-                  </button>
+                  <div className="flex justify-end">
+
+                    <button
+                        className="order-2 sm:order-1 mt-5 bg-red-500 active:bg-red-600 dark:bg-dark-green dark:active:bg-darker-green cursor-pointer text-white dark:text-red-600 disabled:bg-red-900 disabled:text-gray-200 dark:disabled:text-red-800 dark:disabled:bg-gray-900 py-2 px-7 rounded-md font-bold shadow-md"
+                        onClick={handleDelete}
+                        type="button"
+                        disabled={loading}
+                        >
+                      {loading ? (
+                          <div className="flex justify-center items-center">
+                            <CircularProgress
+                                size={20}
+                                sx={{
+                                  color:
+                                      theme === "dark"
+                                      ? "var(--color-menu-button-dark)"
+                                          : "var(--color-button-light-green)",
+                                        }}
+                            />
+                          </div>
+                      ) : (
+                          "Delete"
+                      )}
+                    </button>
+                  </div>
                 </div>
               </>
             </DialogContent>

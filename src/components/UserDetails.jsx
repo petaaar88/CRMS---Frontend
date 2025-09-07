@@ -19,7 +19,7 @@ const UserDetails = () => {
 
   return (
     
-    <div className=" dark:bg-deep-green rounded-xl p-8 mx-4 md:m-0 shadow-lg">
+    <div className="bg-white dark:bg-deep-green rounded-xl p-8 mx-4 md:m-0 shadow-lg">
        {loading ? 
        <div className="h-48 flex justify-center items-center">
             <CircularProgress
